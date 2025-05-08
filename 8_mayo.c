@@ -15,9 +15,9 @@ Esta parte del codigo es posible gracias
     memcpy(&hexValue, &f, sizeof(f));
 
     // Print the float and its hex representation, lo que se ve en la clase, de que 4 bytes pueden ser varios numeros depende de su representación. 
-    printf("Float: %f\n", f);
-    printf("Hex: 0x%08X\n", hexValue);
-    printf("Dec:" %d\n", hexValue); 
+    printf("Float: %f\n", f); // formato IEEE decimal 
+    printf("Hex: 0x%08X\n", hexValue); //entero con signo     
+    printf("Dec:" %d\n", hexValue); //entero sin signo
 
     return 0;
 }

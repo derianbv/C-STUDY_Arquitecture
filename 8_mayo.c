@@ -24,3 +24,36 @@ Esta parte del codigo es posible gracias
 }
 
 
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+// Function to print binary representation of a 32-bit integer
+void print_binary(uint32_t value) {
+    for (int i = 31; i >= 0; i--) {
+        putchar((value & (1U << i)) ? '1' : '0');
+
+        // Optional: add a space after sign, exponent, and mantissa fields
+        if (i == 31 || i == 23) {
+            putchar(' ');
+        }
+    }
+    putchar('\n');
+}
+
+int main() {
+    float f = 3.14f;
+    uint32_t bits;
+
+    memcpy(&bits, &f, sizeof(f));
+
+    printf("Float: %f\n", f);
+    printf("Hex  : 0x%08X\n", bits);
+    printf("Binary: ");
+    print_binary(bits);
+
+    return 0;
+}
+

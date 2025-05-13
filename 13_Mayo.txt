@@ -27,7 +27,7 @@ main:
 	mov x,%al
     add $3,%al
 	mov %al,y
-    xor	%eax, %eax  //con esto hacenos que eax quede en 0 (?).
+    xor	%eax, %eax  //con esto hacenos que eax quede en 0 (?). Como cuando termina la ejecucion del programa y sale esto "...Program finished with exit code 0", es decir, una garantía de que el programa termino hasta el final. 
 	ret
 
 

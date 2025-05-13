@@ -14,3 +14,21 @@ https://onlinegdb.com/dQv1-OSiV         Ej1: ASM using printf hex
 nota flags:
  -no-pie -z noexecstack
 //----------------------------------------------------//
+
+***************  https://onlinegdb.com/NQPbYAcXD       Ej1: ASM **********************************
+
+.data
+    x: .byte 5
+    y: .byte 0
+.text
+.global main
+main:
+	# your code goes here
+	mov x,%al
+    add $3,%al
+	mov %al,y
+    xor	%eax, %eax
+	ret
+
+
+******************************************************************************************************++++

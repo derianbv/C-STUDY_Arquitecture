@@ -20,9 +20,9 @@ nota flags:
 .data    #Lugar en memoria en donde se guardan los datos. 
     x: .byte 5
     y: .byte 0
-.text
+.text #Lugar en memoria en donde se guardan los textos 
 .global main
-main:
+main: 
 	# your code goes here
 	mov x,%al
     add $3,%al

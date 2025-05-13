@@ -27,7 +27,7 @@ main:
 	mov x,%al
     add $3,%al
 	mov %al,y
-    xor	%eax, %eax
+    xor	%eax, %eax  //con esto hacenos que eax quede en 0 (?).
 	ret
 
 

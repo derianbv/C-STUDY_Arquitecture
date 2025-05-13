@@ -1,0 +1,16 @@
+Print float number in hex:
+https://onlinegdb.com/P7Ctw8aoSv 
+Print float number in hex and in binary:
+https://onlinegdb.com/_61YhlWBj 
+//-------------------------------------------------------//
+ASM links:
+https://onlinegdb.com/NQPbYAcXD       Ej1: ASM
+https://onlinegdb.com/uzcHgpy6Zb       Ej1: ASM : instructions suffixed with size letter
+https://onlinegdb.com/ZbzwjNhbW       Ej1: Machine Code
+https://onlinegdb.com/bXVilAhTY          Ej1: Machine Code
+https://onlinegdb.com/cVqvUIC11         Ej1: ASM using printf
+https://onlinegdb.com/dQv1-OSiV         Ej1: ASM using printf hex
+
+nota flags:
+ -no-pie -z noexecstack
+//----------------------------------------------------//

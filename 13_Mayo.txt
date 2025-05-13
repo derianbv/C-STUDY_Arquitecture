@@ -12,7 +12,7 @@ https://onlinegdb.com/cVqvUIC11         Ej1: ASM using printf
 https://onlinegdb.com/dQv1-OSiV         Ej1: ASM using printf hex
 
 nota flags:
- -no-pie -z noexecstack
+ -no-pie -z noexecstack #esto va en la configuracion del GDB 
 //----------------------------------------------------//
 
 ***************  https://onlinegdb.com/NQPbYAcXD       Ej1: ASM **********************************

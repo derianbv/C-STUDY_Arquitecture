@@ -16,7 +16,7 @@ nota flags:
 //----------------------------------------------------//
 
 ***************  https://onlinegdb.com/NQPbYAcXD       Ej1: ASM **********************************
-
+/ Este sitio utiliza el ensamblador de GNU / 
 .data
     x: .byte 5
     y: .byte 0

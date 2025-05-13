@@ -29,7 +29,7 @@ Esta parte del codigo es posible gracias
 
 
 
-
+Estudiar esto para la clase del miércoles 
 // Function to print binary representation of a 32-bit integer
 void print_binary(uint32_t value) {
     for (int i = 31; i >= 0; i--) {

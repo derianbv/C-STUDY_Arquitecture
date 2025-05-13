@@ -17,7 +17,7 @@ nota flags:
 
 ***************  https://onlinegdb.com/NQPbYAcXD       Ej1: ASM **********************************
 / Este sitio utiliza el ensamblador de GNU / 
-.data
+.data    #Lugar en memoria en donde se guardan los datos. 
     x: .byte 5
     y: .byte 0
 .text

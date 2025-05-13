@@ -17,6 +17,8 @@ nota flags:
 
 ***************  https://onlinegdb.com/NQPbYAcXD       Ej1: ASM **********************************
 / Este sitio utiliza el ensamblador de GNU / 
+#Esto hace lo mismo que el codigo de abajo solo que este está en Ensamblador#: 
+
 .data    #Lugar en memoria en donde se guardan los datos. 
     x: .byte 5 #Trabaja con datos de 8 bits con signo. 
     y: .byte 0
@@ -33,6 +35,8 @@ main:
 
 ******************************************************************************************************
  ********************    https://onlinegdb.com/ZbzwjNhbW       Ej1: Machine Code *************************
+#Es el mismo código que arriba solo que esta vez en lenguaje de máquina. 
+
 .data
     x: .byte 5
     y: .byte 0

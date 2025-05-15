@@ -1,1 +1,8 @@
 ISA: Lugar en donde se guardan las instrucciones del procesador
+
+
+Sintaxis de ATT: 
+
+Operacions : 
+  neumónico + op1, op2. 
+  op1 = source(src), op2 destino(dsn)  

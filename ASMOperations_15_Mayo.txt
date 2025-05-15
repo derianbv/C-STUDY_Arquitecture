@@ -17,3 +17,17 @@ Operacions :
     memory + reg: mobv x, %al
     memory + memory NO, ESTA PROHIBIDO
 
+
+
+.data
+    x: .byte 5
+    y: .byte 0
+.text
+.global main
+main:
+	# your code goes here
+	movb    x,%al
+    addb    $3,%al #TOMA LO QUE ESTA EN %AL, LE SUMA $3 Y LUEGO LO VUELVE A GUARDAR EN %AL
+	movb    %al,y
+    xorl	%eax, %eax
+	ret

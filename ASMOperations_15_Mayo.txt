@@ -19,7 +19,7 @@ Operacions :
 
 
 
-.data
+.data //acá se ponen las variable globales
     x: .byte 5
     y: .byte 0
 .text

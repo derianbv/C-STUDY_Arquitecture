@@ -2,13 +2,17 @@ ISA: Lugar en donde se guardan las instrucciones del procesador
 
 
 Sintaxis de ATT: 
+(Orientado a memoria, porque uno de los operandos puede ser memoria) 
 
 Operacions : 
   neumónico + op1, op2. 
   op1 = source(src). Puede ser inmediato Imm($4) o registro (%al) ; op2 destino(dsn). Puede ser registro reg o Memoria. 
   EJEMPLO: 
+    op1 + op2 
     Imm + Reg:  movb $5, %al 
     Imm + Memory: movb $2, x 
     Reg + Reg: movb %al , bl
     Reg + memory: movb %al, x
+    memory + reg: mobv x, %al
+    memory + memory NO, ESTA PROHIBIDO
 

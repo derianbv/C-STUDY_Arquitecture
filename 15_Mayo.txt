@@ -5,4 +5,8 @@ Sintaxis de ATT:
 
 Operacions : 
   neumónico + op1, op2. 
-  op1 = source(src), op2 destino(dsn)  
+  op1 = source(src). Puede ser inmediato Imm($4), op2 destino(dsn). Puede ser registro reg o Memoria. 
+  EJEMPLO: 
+    Imm + Reg:  movb $5, %al 
+    Imm + Memory: movb $2, x 
+

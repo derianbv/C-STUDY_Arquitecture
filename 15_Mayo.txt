@@ -1,1 +1,1 @@
-
+ISA: Lugar en donde se guardan las instrucciones del procesador

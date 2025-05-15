@@ -2,7 +2,7 @@ ISA: Lugar en donde se guardan las instrucciones del procesador
 
 
 Sintaxis de ATT: 
-(Orientado a memoria, porque uno de los operandos puede ser memoria) 
+(Orientado a memoria, porque uno de los operandos puede ser memoria, PERO NO LOS DOS) 
 
 Operacions : 
   neumónico + op1, op2. 

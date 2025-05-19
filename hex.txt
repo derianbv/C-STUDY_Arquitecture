@@ -1,2 +1,7 @@
 Hexadecimales (16): 
 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+
+PASOS: 
+1. Dividir el binario en bloques de 4 (Nybbles): 1100 0010 1111
+
+2. Cada nible puede ir de 0 a 15

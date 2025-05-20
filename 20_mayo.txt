@@ -23,6 +23,21 @@ si voy a ver la direccion con $var, me va a mostrar la direccion virtual, no rea
 
 IMPLEMENTANDO UN IF: -------------------------------------------------------------------------------------------------------
 
+.data
+x:
+.byte 3
+y:
+.byte 0
+z:
+.byte 0
+//fmt_x: .asciz "x = %d\n"
+//fmt_x: .byte 'x', ' ', '=', ' ', '%','d', '\n', '\0'
+fmt_x:
+.byte 0x78, 0x20, 0x3d, 0x20, 0x25, 0x64, 0x0a, 0x00 //esto es lo que hace un compilador
+.text
+.global main
+main:
+
 cmpb $3,x //x -3 
 jne else 
 addb $5,y // y = y+5
@@ -33,10 +48,10 @@ else:
 
 endif: 
   movb $8, x 
-  movsbl x %esi //Aca muevo un registro para ser impresio (se imprime en ese registro). 
+  movsbl x, %esi //Aca muevo un registro para ser impresio (se imprime en ese registro). 
   movl $fmt_x, %edi //en este registro se copia el primer byte de lo que quiero imprimir 
   movl $0, %eax
-  call printf /printf es una etiqueta a donde empieza lo de imprimir
+  call printf //printf es una etiqueta a donde empieza lo de imprimir
 
 xor %eax, %eax
   ret 

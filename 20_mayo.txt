@@ -11,6 +11,6 @@ Instrucciones:
 .text
 .global main
 main:
-    
-	# your code goes here
-    
+
+
+si voy a ver la direccion con $var, me va a mostrar la direccion virtual, no realmente la direccion fisica. El matching de virtual a real lo hace el MMU del cpu

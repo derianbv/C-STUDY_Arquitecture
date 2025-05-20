@@ -33,5 +33,10 @@ else:
 
 endif: 
   movb $8, x 
-  xor %eax, %eax
+  movsbl x %esi //Aca muevo un registro para ser impresio (se imprime en ese registro). 
+  movl $fmtx, %edi 
+  movl $0, %eax
+  call printf
+
+xor %eax, %eax
   ret 

@@ -2,15 +2,21 @@ Instrucciones:
 
 
 .data
-    x: .byte 3
-    y: .byte 0
-    z: .byte 0
-    //fmt_x: .asciz "x = %d\n"
-    //fmt_x: .byte 'x', ' ', '=', ' ', '%','d', '\n', '\0' 
-    fmt_x: .byte 0x78, 0x20, 0x3d, 0x20, 0x25, 0x64, 0x0a, 0x00 //esto es lo que hace un compilador
+x:
+.byte 3
+y:
+.byte 0
+z:
+.byte 0
+//fmt_x: .asciz "x = %d\n"
+//fmt_x: .byte 'x', ' ', '=', ' ', '%','d', '\n', '\0'
+fmt_x:
+.byte 0x78, 0x20, 0x3d, 0x20, 0x25, 0x64, 0x0a, 0x00 //esto es lo que hace un compilador
 .text
 .global main
 main:
 
+xor %eax, %eax
+ret
 
 si voy a ver la direccion con $var, me va a mostrar la direccion virtual, no realmente la direccion fisica. El matching de virtual a real lo hace el MMU del cpu

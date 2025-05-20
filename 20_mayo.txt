@@ -36,7 +36,7 @@ endif:
   movsbl x %esi //Aca muevo un registro para ser impresio (se imprime en ese registro). 
   movl $fmt_x, %edi 
   movl $0, %eax
-  call printf
+  call printf /printf es una etiqueta a donde empieza lo de imprimir
 
 xor %eax, %eax
   ret 

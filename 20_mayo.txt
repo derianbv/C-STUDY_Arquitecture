@@ -20,3 +20,13 @@ xor %eax, %eax
 ret
 
 si voy a ver la direccion con $var, me va a mostrar la direccion virtual, no realmente la direccion fisica. El matching de virtual a real lo hace el MMU del cpu
+
+IMPLEMENTANDO UN IF: -------------------------------------------------------------------------------------------------------
+
+cmpb $3,x //x -3 
+jne else 
+addb $5,y // y = y+5
+
+else: 
+  xor %eax, %eax
+  addb $2, z // z = z+2 

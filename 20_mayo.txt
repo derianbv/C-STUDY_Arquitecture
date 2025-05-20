@@ -28,5 +28,10 @@ jne else
 addb $5,y // y = y+5
 
 else: 
-  xor %eax, %eax
+  
   addb $2, z // z = z+2 
+
+endif: 
+  movb $8, x 
+  xor %eax, %eax
+  ret 

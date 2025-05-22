@@ -5,3 +5,38 @@ PASOS:
 1. Dividir el binario en bloques de 4 (Nybbles): 1100 0010 1111
 
 2. Cada nible puede ir de 0 a 15
+
+
+
+.data
+
+    max: .byte 5
+    sum: .byte 0
+    count: .byte 0
+    
+    fmtsum: .asciz "sum = %d\n"
+    
+.text
+.global main
+main:
+
+while: 
+
+    movb count, %al
+    cmpb %al, max    // count !=  max 
+    jz endwhile
+    
+    addb $1, count   // count = count + 1
+    movb count, %al
+    addb %al, sum    // sum = sum + count
+    jmp while
+    
+endwhile:
+
+    movsbl sum, %esi
+    movl $fmtsum, %edi
+    movl $0, %eax
+    call printf
+    
+	xor	%eax, %eax
+	ret

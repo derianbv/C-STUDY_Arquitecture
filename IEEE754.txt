@@ -6,7 +6,9 @@ se dividen en:  1 para el signo, 8 para el exponente con sesgo y 23 para la part
 ---------------------- PASOS ------------------------------------------------------
 1. Pasar las dos partes antes y después del número a binario, lo de antes del punto tiene que ser pasado como se haría normalmente y lo que está después del punto se pasa multiplicando x2 y tomando la parte decimal hasta que se vuelva 0 (Ver ejemplo). 
 2. Normalizarlo, es decir, pasarlo a notación cientifica de binarios (1.f × 2^e) 
-
+3. Al exponente se le suma 127 (sesgo de 32) y se pasa a binario (lo que va en los 8 bits del exponente) 
+4. A lo que queda después del punto se le agregan 0 hasta que quede de 23 bits. 
+5. Pasar el número a hex 
 
 ------------------------ EJEMPLO: --------------------------------------------------
 
@@ -23,6 +25,13 @@ bin(45) -> 101101
 
 entonces 0.75 -> 0.11 o 2^-1 + 2^-2 
 
-1.1 el numero sería 101101.11. 
+1.1 el numero sería 101101.11
 
-2. Ahora hay que normalizarlo
+2. Ahora hay que normalizarlo: 
+101101.11 -> 1.0110111 x 2^5 
+2.2 Sumarle 127: 1.0110111^132 y ahora bin (132) -> 1000 0100
+
+El numero sería:  1.0110111 x 2^1000 0100 
+
+Entonces el número sería: 0(signo)-10000100(exponente)-0110111000000000000000
+es decir 0100001000110111000000000000000

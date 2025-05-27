@@ -1,0 +1,5 @@
+Registros que no se deben modificar en una funcion! 
+
+RSP 
+RBX
+R12-R15

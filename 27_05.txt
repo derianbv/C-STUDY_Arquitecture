@@ -38,8 +38,12 @@ main:
 
 
 
-Registros que no se deben modificar en una funcion! 
+Registros que no se deben modificar en una funcion (Convencion para Linux: calling convencion)! 
 
 RSP 
-RBX.  
+RBX. Si lo quiero utilizar de todos modos le debo hacer push (para salvar el valor en la pila) y luego pop. 
+EJ: 
+pushq %rbx //guarda rbx y alinea el stack. 
+popq %rbx
+
 R12-R15: Porrque la funcion que llama los esta utilizando. 

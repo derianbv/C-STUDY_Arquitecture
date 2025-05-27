@@ -1,4 +1,4 @@
-DATA TYPES: 
+----------------------------------------------------------DATA TYPES: ------------------------------------------ 
 
 
 
@@ -10,19 +10,19 @@ EPP: TODO ESTO SE TRATA DE ASIGNAR CUANTO ESPACIO EN MEMORIA TENDRAN LOS DATOS.
 Tipos de datos de ATT y su valor en memoria: 
 
 
-| Directiva  | Tamaño            | Descripción                                   |
-| ---------- | ----------------- | --------------------------------------------- |
-| `.byte`    | 1 byte (8 bits)   | Entero pequeño (0–255 o -128–127)             |
-| `.word`    | 2 bytes (16 bits) | Entero mediano (0–65535 o -32768–32767)       |
-| `.long`    | 4 bytes (32 bits) | Entero común (como `int` en C)                |
-| `.quad`    | 8 bytes (64 bits) | Entero grande (como `long long`)              |
-| `.ascii`   | N bytes           | Cadena de caracteres, **sin terminador**      |
-| `.asciz`   | N+1 bytes         | Cadena de caracteres, **con terminador `\0`** |
-| `.string`  | N+1 bytes         | Igual a `.asciz`                              |
-| `.float`   | 4 bytes           | Número flotante (IEEE 754, tipo `float`)      |
-| `.double`  | 8 bytes           | Número flotante (IEEE 754, tipo `double`)     |
-| `.zero N`  | N bytes           | Rellena con N ceros                           |
-| `.space N` | N bytes           | Reserva N bytes (contenido sin definir)       |
+| Directiva ASM | Tamaño (bytes) | Descripción                       | Nombre en Calculadora Windows |
+| ------------- | -------------- | --------------------------------- | ----------------------------- |
+| `.byte`       | 1              | Entero pequeño (8 bits)           | Byte                          |
+| `.word`       | 2              | Entero mediano (16 bits)          | Word                          |
+| `.long`       | 4              | Entero común (32 bits)            | Dword (Double Word)           |
+| `.quad`       | 8              | Entero grande (64 bits)           | Qword (Quad Word)             |
+| `.ascii`      | N              | Cadena sin terminador null        | —                             |
+| `.asciz`      | N+1            | Cadena terminada en null          | —                             |
+| `.string`     | N+1            | Alias de `.asciz`                 | —                             |
+| `.float`      | 4              | Número flotante (IEEE 754 float)  | —                             |
+| `.double`     | 8              | Número flotante (IEEE 754 double) | —                             |
+| `.zero N`     | N              | N bytes rellenos con cero         | —                             |
+| `.space N`    | N              | Reserva N bytes sin inicializar   | —                             |
 
 
 

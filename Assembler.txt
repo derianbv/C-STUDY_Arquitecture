@@ -94,7 +94,32 @@ EPP: EN CASCADA DE MENOR A MAYOR (LITTLE ENDIAN).
     fmtux: .string "n: %u\n" //formato sin signo
     fmtsx: .string "n: %d\n"  //formato con signo
     fmtf: .asciz "f: %f\n"
-    
+
+************ WILDCARDS o modificadores de formato **************: 
+
+| Especificador             | Modificador | Significado                                  | Ejemplo             |
+| ------------------------- | ----------- | -------------------------------------------- | ------------------- |
+| `%d` / `%i`               |             | Entero con signo (decimal)                   | 42, -7              |
+| `%u`                      |             | Entero sin signo (unsigned)                  | 42                  |
+| `%x`                      |             | Entero sin signo en hexadecimal (minúsculas) | `2a`                |
+| `%X`                      |             | Entero sin signo en hexadecimal (mayúsculas) | `2A`                |
+| `%o`                      |             | Entero sin signo en octal                    | `52`                |
+| `%c`                      |             | Carácter                                     | `'A'`               |
+| `%s`                      |             | Cadena de caracteres (string)                | `"Hola"`            |
+| `%f`                      |             | Número de punto flotante (float/double)      | `3.14`              |
+| `%e` / `%E`               |             | Notación científica (exponencial)            | `3.14e+00`          |
+| `%g` / `%G`               |             | Elige `%f` o `%e` según sea más corta        | `3.14` o `3.14e+00` |
+| `%p`                      |             | Puntero (dirección de memoria)               | `0x7ffee0c`         |
+| `%%`                      |             | Imprime un signo `%` literal                 | `%`                 |
+| `%d` / `%u` / `%x` / `%o` | `l`         | Entero largo (`long`)                        | `%ld`               |
+| `%d` / `%u` / `%x` / `%o` | `ll`        | Entero largo largo (`long long`)             | `%lld`              |
+| `%d` / `%u` / `%x` / `%o` | `h`         | Entero corto (`short`)                       | `%hd`               |
+| `%f` / `%e` / `%g`        | `.N`        | Precisión decimal                            | `%.2f`              |
+| `%d` / `%u` / `%x` / `%o` | `0N`        | Rellenar con ceros a ancho mínimo            | `%05d`              |
+
+
+
+
 .text
 .global main
 main:

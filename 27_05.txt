@@ -1,3 +1,43 @@
+SUMAR PUNTO FLOTANT: 
+
+.data
+x:
+    .byte 0xC3, 0xF5, 0x48, 0x40   // Representa 3.14f en formato float (IEEE 754)
+
+y:
+    .byte 0x66, 0x66, 0x06, 0x40   // Representa 2.10f en formato float (IEEE 754)
+
+fmt:
+    .byte 0x78, 0x20, 0x3D, 0x20, 0x25, 0x66, 0x0A, 0x00
+    // 'x' ' ' '=' ' ' '%' 'f' '\n' '\0' en ASCII
+
+.text
+.global main
+main:
+    subq $8, %rsp
+
+    movss x, %xmm1        
+    movss y, %xmm0       
+    addss %xmm1, %xmm0
+    movss %xmm0, x         
+    movss x, %xmm0
+    cvtss2sd %xmm0, %xmm0
+
+    movl $fmt, %edi       
+    movl $1, %eax
+    call printf
+
+    xor %eax, %eax
+    addq $8, %rsp
+    ret
+
+
+
+
+
+
+
+
 Registros que no se deben modificar en una funcion! 
 
 RSP 

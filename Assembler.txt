@@ -1,3 +1,26 @@
+DATA TYPES: 
+
+| Directiva | Tamaño (bytes) | Significado                   |
+| --------- | -------------- | ----------------------------- |
+| `.byte`   | 1 byte         | 8 bits (0 a 255 o -128 a 127) |
+| `.word`   | 2 bytes        | 16 bits                       |
+| `.long`   | 4 bytes        | 32 bits                       |
+| `.quad`   | 8 bytes        | 64 bits                       |
+| `.ascii`  | N bytes        | Cadena de caracteres sin `\0` |
+| `.asciz`  | N+1 bytes      | Cadena con terminador `\0`    |
+| `.string` | N+1 bytes      | Alias de `.asciz`             |
+
+
+En la parte de .data, siempre que tenemos una etiqueta como x: .byte 
+
+
+
+
+
+
+
+------------------------------------------- EJEMPLO --------------------------------------------------------------
+
 .data
 
     x: .byte 0x66, 0x66, 0x3d, 0xc2 // decimos que tenemos un valor en memoria que va a guardar bytes, entonces, x apunta al primero de los bytes y ya despues, los que vienen fisicamente despus de x son lo0s otros valores, como un arreglo. 
@@ -125,3 +148,12 @@ main:
 	
 	add $8, %rsp
 	ret
+
+
+
+
+
+
+
+
+

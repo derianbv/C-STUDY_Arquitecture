@@ -114,3 +114,33 @@ No preservar	rax, rcx, rdx, rsi, rdi, r8, r9, r10, r11
 R12-R15: Porrque la funcion que llama los esta utilizando. 
 
 
+TAREA: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Tarea #5:
+https://onlinegdb.com/OxFWPSW8hs    C
+
+PASAR ESTO A ASM: 
+
+
+
+#include <stdio.h>
+#include <stdint.h>
+
+float x=3.14,y=4.2;
+int8_t q=5,v=0,w=9;
+
+int main()
+{
+    
+    x=x+q;
+    
+    x=x+y;
+
+    v=x;
+    
+    v=v+w;
+    
+    printf("x = %f\n",x);
+    printf("v = %d\n",v);
+
+    return 0;
+}

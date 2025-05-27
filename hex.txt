@@ -18,7 +18,9 @@ Hex	Decimal
 0x1F	31
 
 Es como que hex es una manera facil de leer los bits
+Por ejemplo, el indicativo de que se viene un numero binario es 0b (tal como 0x): 
 
+0b10001111 -> 0x8F 
 
 
 

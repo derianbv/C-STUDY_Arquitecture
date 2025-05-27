@@ -45,7 +45,7 @@ RBX. Si lo quiero utilizar de todos modos le debo hacer push (para salvar el val
 EJ: 
 pushq %rbx //guarda rbx y alinea el stack. 
 popq %rbx
-
+-y se deben sacar en orden inverso al que los metí 
 
 Preservar	rbx, rbp, r12, r13, r14, r15
 (y el puntero de pila rsp, obviamente, debe restaurarse al final)

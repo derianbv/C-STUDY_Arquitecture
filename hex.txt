@@ -7,6 +7,28 @@ PASOS:
 2. Cada nible puede ir de 0 a 15
 
 
+La manera en que los lee un compilador de ensamblador: 
+Hex	Decimal
+0x0	0
+0x1	1
+0x9	9
+0xA	10
+0xF	15
+0x10	16
+0x1F	31
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .data
 

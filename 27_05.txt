@@ -144,3 +144,23 @@ int main()
 
     return 0;
 }
+
+
+TAREA: 
+
+implementar en AS esto desde C: 
+
+#include <stdio.h>
+#include <stdint.h>
+
+int8_7 a[6] = {1,2,3,4,5,6} 
+
+int main()
+{
+
+x = a[2] + a[5] 
+printf("%d\n",x) 
+
+return 0; 
+
+}

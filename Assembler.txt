@@ -66,6 +66,23 @@ MSB        ...   LSB
 entonces internamente el número es: 
 0xC2-3D-66-66
 
+0xC2 (más significativo)
+0x3D
+0x66
+0x66 (menos significativo)
+
+→ 0xC23D6666
+
+En la dirección etiquetada como x, guarda:
+
+Byte 0: 0x66 ← 📍 esta es la dirección x
+
+Byte 1: 0x66
+
+Byte 2: 0x3D
+
+Byte 3: 0xC2
+EPP: EN CASCADA DE MENOR A MAYOR. 
 
     y1 : .byte 0x3d, 0xc2
     y2: .byte 0x66, 0x66

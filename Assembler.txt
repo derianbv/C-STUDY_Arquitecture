@@ -28,8 +28,26 @@ Tipos de datos de ATT y su valor en memoria:
 
 Anotaciones: 
 1. Se salta el valor de tres bytes.
+2. La diferencia entre cadenas de texto con terminador y sin terminador se basa en que una guarda un dato con un 0x00 (0 en decimal) para indicar que ahí terminó la cadena de texto. Si no tiene terminador es como no poner pared o bandera que inidique que esos bits son los de la cadena: 
+
+1. Cadena sin terminador (.ascii)
+
+.ascii "Hola"
+
+-En memoria: 
+'H' 'o' 'l' 'a'
+0x48 0x6F 0x6C 0x61
+
+luego de eso siguen otros bits, los que sea que este usando la memoria en ese momento. 
 
 
+
+2. Cadena con terminador (.asciz o .string): 
+
+.asciz 'H' 'o' 'l' 'a': 
+-En memoria: (se añade un 0). 
+'H' 'o' 'l' 'a' '\0'
+0x48 0x6F 0x6C 0x61 0x00
 
 
 ------------------------------------------- EJEMPLO --------------------------------------------------------------

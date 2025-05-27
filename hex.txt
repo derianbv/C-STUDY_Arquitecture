@@ -7,7 +7,7 @@ PASOS:
 2. Cada nible puede ir de 0 a 15
 
 
-La manera en que los lee un compilador de ensamblador: 
+La manera en que los lee un compilador de ensamblador es con el indicativo de 0x, la x es de hexadecimal: 
 Hex	Decimal
 0x0	0
 0x1	1
@@ -18,7 +18,6 @@ Hex	Decimal
 0x1F	31
 
 Es como que hex es una manera facil de leer los bits
-
 
 
 

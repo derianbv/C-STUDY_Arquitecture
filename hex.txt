@@ -1,4 +1,4 @@
-Hexadecimales (16): 
+eHexadecimales (16): 
 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
 
 PASOS: 
@@ -17,6 +17,7 @@ Hex	Decimal
 0x10	16
 0x1F	31
 
+Es como que hex es una manera facil de leer los bits
 
 
 

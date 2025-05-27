@@ -42,7 +42,7 @@ int main()
 {
     printf("Hello World");
     
-    x=x+y;
+    x=x+y; 
     
     printf("x = %f",x);
 
@@ -50,7 +50,48 @@ int main()
 }
 
 ---------------------------------------------------------------------------------------------------
+SUMAR INT con FLOAT:
 
+.data
+    x: .float 3.14
+    q: .byte 5
+    v: .byte 0
+    fmtx: .asciz "x = %f\n"
+    fmtv: .asciz "v = %d\n"
+    
+.text
+.global main
+main:
+	# your code goes here
+	
+	subq $8,%rsp
+	
+
+    movsbl          q, %eax
+    cvtsi2ssl       %eax, %xmm1     //cvtsi2ssl: Convert Doubleword Integer to Scalar Single Precision Floating-Point Value
+    movss           x, %xmm0        //movss: Move or Merge Scalar Single Precision Floating-Point Value
+    addss           %xmm1, %xmm0    //addss: Scalar Single Precision Floating-Point Values
+    movss           %xmm0, x
+    
+    movss           x, %xmm0
+    cvttss2sil      %xmm0, %eax     //cvttss2sil: Convert With Truncation Scalar Single Precision Floating-Point Value to Integer
+    movb            %al, v
+    
+    movss       x,%xmm0
+    cvtss2sd    %xmm0,%xmm0         //cvtss2sd: Convert Scalar Single Precision Floating-Point Value to Scalar Double PrecisionFloating-Point Value 
+    movl        $fmtx,%edi
+    movl        $1,%eax
+    call        printf
+    
+    movsbl      v,%esi
+    movl        $fmtv,%edi
+    movl        $0,%eax
+    call        printf    
+	
+	xor	%eax, %eax
+	addq $8,%rsp
+	ret
+----------------------------------------------------------------------------------------------------
 
 
 

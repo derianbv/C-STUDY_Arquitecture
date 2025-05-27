@@ -1,0 +1,115 @@
+.data
+
+    x: .byte 0x66, 0x66, 0x3d, 0xc2
+    y1 : .byte 0x3d, 0xc2
+    y2: .byte 0x66, 0x66
+    z1: .byte 0xc2
+    z2: .byte 0x3d
+    z3: .byte 0x66
+    z4: .byte 0x66
+    
+    fmtux: .string "n: %u\n" //formato sin signo
+    fmtsx: .string "n: %d\n"  //formato con signo
+    fmtf: .asciz "f: %f\n"
+    
+.text
+.global main
+main:
+
+    subq $8, %rsp
+    
+    ## 4 bytes con signo
+    
+    movl x, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf
+
+    ## 4 bytes sin signo
+    
+    movl x, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf
+    
+    ## 2 bytes con signo
+    
+    movswl y1, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf    
+    
+    movswl y2, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf
+    
+    ## 2 bytes sin signo
+    
+    movzwl y1, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf    
+    
+    movzwl y2, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf
+    
+    ## 1 byte con signo
+    
+    movsbl z1, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf    
+    
+    movsbl z2, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf    
+    
+    movsbl z3, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf    
+    
+    movsbl z4, %esi
+    movl $fmtsx, %edi
+    movl $0, %eax
+    call printf 
+
+    ## 1 byte sin signo
+    
+    movzbl z1, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf    
+    
+    movzbl z2, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf    
+    
+    movzbl z3, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf    
+    
+    movzbl z4, %esi
+    movl $fmtux, %edi
+    movl $0, %eax
+    call printf 
+    
+    ## 4 bytes a flotante
+    
+    movss x, %xmm0                       
+    cvtss2sd %xmm0, %xmm0               
+
+    movl $fmtf, %edi          
+    movl $1, %eax                       
+    call printf
+
+	xor	%eax, %eax
+	
+	add $8, %rsp
+	ret

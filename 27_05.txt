@@ -41,5 +41,5 @@ main:
 Registros que no se deben modificar en una funcion! 
 
 RSP 
-RBX
-R12-R15
+RBX.  
+R12-R15: Porrque la funcion que llama los esta utilizando. 

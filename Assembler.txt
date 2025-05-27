@@ -1,20 +1,33 @@
 DATA TYPES: 
 
-| Directiva | Tamaño (bytes) | Significado                   |
-| --------- | -------------- | ----------------------------- |
-| `.byte`   | 1 byte         | 8 bits (0 a 255 o -128 a 127) |
-| `.word`   | 2 bytes        | 16 bits                       |
-| `.long`   | 4 bytes        | 32 bits                       |
-| `.quad`   | 8 bytes        | 64 bits                       |
-| `.ascii`  | N bytes        | Cadena de caracteres sin `\0` |
-| `.asciz`  | N+1 bytes      | Cadena con terminador `\0`    |
-| `.string` | N+1 bytes      | Alias de `.asciz`             |
 
 
 En la parte de .data, siempre que tenemos una etiqueta como x: .byte 
+entonces le estamos diciendo que en ese espacio en memoria voy a guardarr solo datos tipo byte, es decir, que ocupan 8 bits
+EPP: TODO ESTO SE TRATA DE ASIGNAR CUANTO ESPACIO EN MEMORIA TENDRAN LOS DATOS. 
+
+
+Tipos de datos de ATT y su valor en memoria: 
+
+
+| Directiva  | Tamaño            | Descripción                                   |
+| ---------- | ----------------- | --------------------------------------------- |
+| `.byte`    | 1 byte (8 bits)   | Entero pequeño (0–255 o -128–127)             |
+| `.word`    | 2 bytes (16 bits) | Entero mediano (0–65535 o -32768–32767)       |
+| `.long`    | 4 bytes (32 bits) | Entero común (como `int` en C)                |
+| `.quad`    | 8 bytes (64 bits) | Entero grande (como `long long`)              |
+| `.ascii`   | N bytes           | Cadena de caracteres, **sin terminador**      |
+| `.asciz`   | N+1 bytes         | Cadena de caracteres, **con terminador `\0`** |
+| `.string`  | N+1 bytes         | Igual a `.asciz`                              |
+| `.float`   | 4 bytes           | Número flotante (IEEE 754, tipo `float`)      |
+| `.double`  | 8 bytes           | Número flotante (IEEE 754, tipo `double`)     |
+| `.zero N`  | N bytes           | Rellena con N ceros                           |
+| `.space N` | N bytes           | Reserva N bytes (contenido sin definir)       |
 
 
 
+Anotaciones: 
+1. Se salta el valor de tres bytes.
 
 
 

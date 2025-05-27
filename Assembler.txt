@@ -82,7 +82,7 @@ Byte 1: 0x66
 Byte 2: 0x3D
 
 Byte 3: 0xC2
-EPP: EN CASCADA DE MENOR A MAYOR. 
+EPP: EN CASCADA DE MENOR A MAYOR (LITTLE ENDIAN). 
 
     y1 : .byte 0x3d, 0xc2
     y2: .byte 0x66, 0x66

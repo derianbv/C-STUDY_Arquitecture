@@ -1,6 +1,18 @@
 .data
 
-    x: .byte 0x66, 0x66, 0x3d, 0xc2
+    x: .byte 0x66, 0x66, 0x3d, 0xc2 // decimos que tenemos un valor en memoria que va a guardar bytes, entonces, x apunta al primero de los bytes y ya despues, los que vienen fisicamente despus de x son lo0s otros valores, como un arreglo. 
+// x -> 0x66 | 0x66 | 0x3d | 0xc2 |, en esta arquitectura de 32 bits ATT ASM, los valores se guardan en little endian, es decir que el primero que le paso es el de menor valor, y luego el pc cuando lo interprete entonces le cambia el orden: 
+
+x: .byte 0x66, 0x66, 0x3d, 0xc2
+
+0xC2 0x3D 0x66 0x66
+↑    ↑    ↑    ↑
+MSB        ...   LSB
+
+entonces internamente el número es: 
+0xC2-3D-66-66
+
+
     y1 : .byte 0x3d, 0xc2
     y2: .byte 0x66, 0x66
     z1: .byte 0xc2

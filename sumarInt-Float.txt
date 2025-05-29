@@ -26,10 +26,28 @@ int main()
 
 a ensamblador: --------------------------------------------------------------------------------------------------------------------------------------------
 Los números flotantes no se pueden operar en el ALU (ARITMETI LOGIC UNIT), esta parte del pc es la que trabaja con los registros de %eax %ebx %ecx, sino, los maneja una unidad que se llama Floating Point Unit, y para esta unidad se utiliza %xmm0 o %xmm1. Tambien
-
+%eax tiene 32 bits, %mm0 tiene 128 bits. 
 
 🧩 Resumen rápido:
 👉 Los enteros usan %eax, %ebx porque trabajan con la ALU.
 👉 Los flotantes usan %xmm0, %xmm1 porque se procesan en la FPU/SSE.
 
+movsbl MOVe con Sign extension a un Byte para convertirlo en un Long (32 bits).
+mov y el signed byte a long
+
+❗ Problema real:
+mov $-4, %al     # al = 11111100
+mov %al, %eax    # eax = ???????? ???????? ???????? 11111100
+
+
+
+┌──────────────┐
+│   %rax       │ 64 bits (registro completo en x86-64)
+├──────────────┤
+│   %eax       │ 32 bits (parte baja de %rax)
+├──────┬───────┤
+│ %ah  │ %al   │ 8 bits altos y bajos de los 16 bits bajos de %ax
+├──────┴───────┤
+│   %ax        │ 16 bits (parte baja de %eax)
+└──────────────┘
 

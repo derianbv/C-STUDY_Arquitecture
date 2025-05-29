@@ -94,3 +94,82 @@ Y poner en %eax cuántos %xmm estás usando.
 | `memcpy`   | `void* memcpy(void* dest, const void* src, size_t n)`        | ❌ No        | ❌ No                                            |
 | `read`     | `ssize_t read(int fd, void* buf, size_t count)`              | ❌ No        | ❌ No                                            |
 
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------ RESULTADO: ------------------------------------------------------------
+
+
+.data
+    x: .float 3.14
+    y: .float 4.2
+    q: .byte 5
+    w: .byte 9
+    v: .byte 0
+    fmtx: .string "x = %f\n"
+    fmtv: .string "v = %d\n"
+
+
+.text
+.global main
+main:
+    subq $8,%rsp
+
+//    x=x+q;
+    
+    movsbl      q, %eax         
+    cvtsi2ssl   %eax, %xmm1         // Convierte el entero en %eax a flotante de precisión simple   
+    movss       x, %xmm0                
+    addss       %xmm1, %xmm0    
+    movss       %xmm0, x     
+//  x=x+y;
+ 
+    movss y, %xmm1
+    addss %xmm0, %xmm1
+    movss %xmm1, x 
+    
+//    v=x; truncar el flotante 
+    
+    cvttss2sil %xmm1, %eax //convert y trunc ss 2 single integer large
+    movb %al, v 
+    
+//     v=v+w;
+    
+    movb w, %bl 
+    addb %bl, v
+    
+// imprimir 
+
+
+    //printf("x = %f\n",x);
+    //printf("v = %d\n",v);
+
+//print x: 
+    
+    movss x, %xmm0 
+    cvtss2sd %xmm0, %xmm0
+    movl $fmtx, %edi 
+    movl $1, %eax
+    call printf 
+
+//print v: 
+
+  movsbl v, %esi 
+  movl $fmtv, %edi 
+  movl $0, %eax 
+  call printf 
+    
+//
+	xor	%eax, %eax
+	addq $8,%rsp
+	ret
+

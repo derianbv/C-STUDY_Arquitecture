@@ -51,3 +51,27 @@ mov %al, %eax    # eax = ???????? ???????? ???????? 11111100
 │   %ax        │ 16 bits (parte baja de %eax)
 └──────────────┘
 
+
+Para las funciones de call + funcion, este es el orden para buscar cosas por el call: 
+
+| Tipo de argumento      | Registro donde lo busca |
+| ---------------------- | ----------------------- |
+| 1er `double` / `float` | `%xmm0`                 |
+| 2do `double` / `float` | `%xmm1`                 |
+| 1er `int` / puntero    | `%rdi`                  |
+| 2do `int`              | `%rsi`                  |
+| etc.                   | ...                     |
+
+
+
+Tipo de función	Ejemplo	¿Sabe cuántos argumentos recibe?
+Fija	void saluda(int a, float b)	✅ Sí, el compilador lo sabe
+Variádica	int printf(const char*, ...)	❌ No, el compilador NO lo sabe, los ... implica que pueden haber mas argumentos 
+
+
+En particular:
+⚠️ Cuando llamas a una función variádica y pasas argumentos de punto flotante (float o double), debes:
+
+Pasarlos por los registros %xmm0, %xmm1, etc.
+
+Y poner en %eax cuántos %xmm estás usando.

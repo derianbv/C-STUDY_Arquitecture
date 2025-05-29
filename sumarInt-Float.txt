@@ -75,3 +75,22 @@ En particular:
 Pasarlos por los registros %xmm0, %xmm1, etc.
 
 Y poner en %eax cuántos %xmm estás usando.
+
+
+| Función    | Firma en C                                                   | ¿Variádica? | ¿Necesita `mov $N, %eax` antes de `call`?       |
+| ---------- | ------------------------------------------------------------ | ----------- | ----------------------------------------------- |
+| `printf`   | `int printf(const char* fmt, ...)`                           | ✅ Sí        | ✅ **Sí** (ej. `mov $1, %eax` si pasas un float) |
+| `scanf`    | `int scanf(const char* fmt, ...)`                            | ✅ Sí        | ✅ **Sí**                                        |
+| `fprintf`  | `int fprintf(FILE* stream, const char* fmt, ...)`            | ✅ Sí        | ✅ **Sí**                                        |
+| `sprintf`  | `int sprintf(char* str, const char* fmt, ...)`               | ✅ Sí        | ✅ **Sí**                                        |
+| `snprintf` | `int snprintf(char* str, size_t size, const char* fmt, ...)` | ✅ Sí        | ✅ **Sí**                                        |
+| `logf`     | `void logf(const char* fmt, ...)`                            | ✅ Sí        | ✅ **Sí**                                        |
+| `puts`     | `int puts(const char* s)`                                    | ❌ No        | ❌ No                                            |
+| `exit`     | `void exit(int code)`                                        | ❌ No        | ❌ No                                            |
+| `malloc`   | `void* malloc(size_t size)`                                  | ❌ No        | ❌ No                                            |
+| `free`     | `void free(void* ptr)`                                       | ❌ No        | ❌ No                                            |
+| `strlen`   | `size_t strlen(const char* s)`                               | ❌ No        | ❌ No                                            |
+| `fopen`    | `FILE* fopen(const char* path, const char* mode)`            | ❌ No        | ❌ No                                            |
+| `memcpy`   | `void* memcpy(void* dest, const void* src, size_t n)`        | ❌ No        | ❌ No                                            |
+| `read`     | `ssize_t read(int fd, void* buf, size_t count)`              | ❌ No        | ❌ No                                            |
+

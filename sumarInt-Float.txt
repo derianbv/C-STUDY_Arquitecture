@@ -1,1 +1,35 @@
+Idea, pasar de este código: 
+
+#include <stdio.h>
+#include <stdint.h>
+
+float x=3.14,y=4.2;
+int8_t q=5,v=0,w=9;
+
+int main()
+{
+    
+    x=x+q;
+    
+    x=x+y;
+
+    v=x;
+    
+    v=v+w;
+    
+    printf("x = %f\n",x);
+    printf("v = %d\n",v);
+
+    return 0;
+}
+
+
+a ensamblador: --------------------------------------------------------------------------------------------------------------------------------------------
+Los números flotantes no se pueden operar en el ALU (ARITMETI LOGIC UNIT), esta parte del pc es la que trabaja con los registros de %eax %ebx %ecx, sino, los maneja una unidad que se llama Floating Point Unit, y para esta unidad se utiliza %xmm0 o %xmm1. Tambien
+
+
+🧩 Resumen rápido:
+👉 Los enteros usan %eax, %ebx porque trabajan con la ALU.
+👉 Los flotantes usan %xmm0, %xmm1 porque se procesan en la FPU/SSE.
+
 

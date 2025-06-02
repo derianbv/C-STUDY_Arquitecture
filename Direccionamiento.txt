@@ -1,1 +1,13 @@
+Tipos de datos en data: 
 
+
+| Tipo                 | Bytes | Significado         |
+| -------------------- | ----- | ------------------- |
+| `.byte`              | 1     | Entero pequeño      |
+| `.word` o `.short`   | 2     | Entero mediano      |
+| `.long` o `.int`     | 4     | Entero grande       |
+| `.quad` o `.llong`   | 8     | Entero 64 bits      |
+| `.float` o `.single` | 4     | Flotante simple     |
+| `.double`            | 8     | Flotante doble      |
+| `.ascii`             | n     | Cadena sin `\0`     |
+| `.asciz`             | n+1   | Cadena **con** `\0` |

@@ -2,14 +2,14 @@
 comparando numeros Con signo: ************************************************************************
 cmp $4, %eax → compara %eax - 4
 
-jng = jump if not greater (≤)
+jng etiqueta = jump if not greater (≤)
 
-jle = jump if less or equal (igual que jng)
+jle etiqueta = jump if less or equal (igual que jng)
 
 comparando numeros Sin signo: ************************************************************************
-ja = jump if above
+ja etiqueta = jump if above
 
-jb = jump if below
+jb etiqueta = jump if below
 
 
 

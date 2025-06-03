@@ -45,3 +45,46 @@ endw1:
 	popq %rbx
 	ret
 ---------------------------------------------------------------------------------------------------------------------
+MISMO EJEMPLO DE ARRIBA PERO CON 16 BITS (WORD)---------------------------------------------------------------------
+
+.data
+    //int16_t a[6]={4587,16425,-28724,19324,-4087,700};     
+    a: .word 4587,16425,-28724,19324,-4087,700   
+    //int16_t sum;
+    sum: .word 0 
+    //int8_t;
+    i: .byte 0 
+    fmt: .asciz "sum = %d\n"
+.text
+.global main
+main:
+	# your code goes here
+	
+	pushq %rbx
+	
+    //while(i<6)
+    //{	
+initw1:
+    cmpb    $6,i                //(i)-6  
+    jnl     endw1               //if condition not true jump to end of while loop
+    //sum=sum+a[i];
+    movsbl  i,%eax              //eax <-- (i) in 32 bits 
+    cltq                        //rax <-- (i) in 64 bits 
+    movw    a(,%rax,2),%ax      //ax <-- (a+(i)*2) 16 bits<--> ax <-- a[i]
+    addw    %ax,sum             //sum <-- (sum) + a[i]
+    //i++;
+    incb    i                   //i <-- (i) + 1
+    jmp     initw1              //jump to evaluate while condition 
+    //}
+endw1:
+	
+	//printf("sum = %d\n",sum);
+	movswl  sum,%esi 
+	movl    $fmt,%edi
+	movl    $0,%eax
+	call    printf
+	
+	//return 0;
+	xor	%eax, %eax
+	popq %rbx
+	ret

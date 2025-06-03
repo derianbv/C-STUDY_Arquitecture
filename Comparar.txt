@@ -1,1 +1,13 @@
+🧠 Comparaciones y saltos  ---------------------------------------------------------------------
+Con signo: ************************************************************************
+cmp $4, %eax → compara %eax - 4
+
+jng = jump if not greater (≤)
+
+jle = jump if less or equal (igual que jng)
+
+Sin signo: ************************************************************************
+ja = jump if above
+
+jb = jump if below
 

@@ -1,3 +1,5 @@
+
+
 Tipos de datos en data: 
 
 
@@ -34,3 +36,34 @@ Dentro de la caja, hay un número guardado: por ejemplo, el número 42
 | ------------ | ------------------------------------------------------ | ----------- |
 | `$a`         | Dame **la dirección donde vive `a`**                   | 601038      |
 | `a`          | Ve a esa dirección y **dame lo que hay dentro de `a`** | 42          |
+
+
+
+----------------------------------------------------------------------------------------------
+TIPOS DE DIRECCIONAMIENTO: 
+1. DIRECTO ( movb a+2, ): 
+Se trata de pasar el valor de la variable y ya: 
+movb a, %al. 
+CARACTERISTICAS: 
+Se trata de una varible de .data en la cual su valor y posición en memoria nunca cambian. 
+
+2. INDIRECTO (movb a(%rax)): 
+NECESITA: a (el inicio del arreglo) y la direccion en memoria de lo que quiero encontrar(i): 
+
+-Se basa en la idea de que a[i] = a + i en ASM. 
+
+movsbl i, %eax     ; EAX = valor de índice i
+cltq               ; EAX → RAX (extiende a 64 bits), esto porque todas las direcciones en memoria miden 64 bits, en RAX se guardan direcciones en memoria, Todos los registros grandes (los que tiene R) pueden guardar direcciones en memoria: 
+%rax, %rbx, %rcx, %rdx, %rsi, %rdi, %rsp, %rbp, %r8… hasta %r15
+movb a(%rax), %al  ; Accede al dato que está en a + i: 
+
+| Forma        | Traducción real                               |
+| ------------ | --------------------------------------------- |
+| `4(%rax)`    | dirección = `%rax` + 4                        |
+| `a(%rax)`    | dirección = `a` (base) + `%rax`               |
+| `a(,%rax,4)` | dirección = `a` + `%rax × 4` (útil en arrays) |
+
+-No existe byte (8 bits) a quad (64bits) entonces debemos hacer esto para mover un dato a %rax: 
+movsbl i, %eax    # byte → int32
+movslq %eax, %rax # int32 → int64
+

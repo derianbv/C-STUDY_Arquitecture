@@ -1,1 +1,46 @@
 incb    i sirve para i++
+cltq extiende eax a rax 
+
+------------------------- COMENTARIOS SIGNIFICATIVOS ------------------------------------------------------------------------
+--------------------------  IF CON DIRECCIONAMIENTO-------------------------------------------------------------------------
+
+.data
+    //int8_t a[6]={45,32,-28,72,-40,7};  
+    a: .byte 45,32,-28,72,-40,7
+    //int8_t sum,i;
+    sum: .byte 0 
+    i: .byte 0 
+    fmt: .asciz "sum = %d\n"
+.text
+.global main
+main:
+	# your code goes here
+	
+	pushq %rbx
+	
+    //while(i<6)
+    //{	
+initw1:
+    cmpb    $6,i
+    jnl     endw1
+    //sum=sum+a[i];
+    movsbl  i,%eax      // (i) significa el valor, i significa la direccion para los comentarios 
+    cltq                //rax <-- (i) eb 64 bits 
+    movb    a(%rax),%al  //al <-- (a[i]) en 8 bits 
+    addb    %al,sum     //sum <-- (a[i] + sum) en 8 bits 
+    //i++;
+    incb    i 
+    jmp     initw1
+    //}
+endw1:
+	
+	//printf("sum = %d\n",sum);
+	movsbl  sum,%esi 
+	movl    $fmt,%edi
+	movl    $0,%eax
+	call    printf
+	
+	//return 0;
+	xor	%eax, %eax
+	popq %rbx
+	ret

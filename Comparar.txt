@@ -6,6 +6,8 @@ jng etiqueta = jump if not greater (≤)
 
 jle etiqueta = jump if less or equal (igual que jng)
 
+jle etiqueta = jump if less 
+
 comparando numeros Sin signo: ************************************************************************
 ja etiqueta = jump if above
 

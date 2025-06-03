@@ -15,5 +15,22 @@ Tipos de datos en data:
 
 
 ------------------------------ DIRECCIONAMIENTO ------------------------------------------------
-$a vs a (Valor inmediato, valor etiqueta o variable): 
-$a es un tipo de dato inmediato, a es un address. 
+$a vs a (Valor inmediato, valor etiqueta o variable):
+
+
+$a es la direccion 
+a es lo que esta en la caja 
+
+Ejemplo> 
+
+Tienes una caja llamada a que está en una estantería (la memoria del computador).
+
+Esa caja vive en una dirección, por ejemplo: 601038
+
+Dentro de la caja, hay un número guardado: por ejemplo, el número 42
+
+
+| Lo que dices | ¿Qué le estás pidiendo al computador?                  | ¿Qué te da? |
+| ------------ | ------------------------------------------------------ | ----------- |
+| `$a`         | Dame **la dirección donde vive `a`**                   | 601038      |
+| `a`          | Ve a esa dirección y **dame lo que hay dentro de `a`** | 42          |

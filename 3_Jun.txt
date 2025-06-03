@@ -1,1 +1,1 @@
-
+incb    i sirve para i++

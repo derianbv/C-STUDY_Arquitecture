@@ -20,3 +20,7 @@ jb etiqueta = jump if below
        ┌────────────┴────────────┐
    (sin signo)              (con signo)
      ja / jb                  jg / jl
+
+
+
+jnl: jump not less

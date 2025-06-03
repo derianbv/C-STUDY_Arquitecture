@@ -10,4 +10,10 @@ Tipos de datos en data:
 | `.float` o `.single` | 4     | Flotante simple     |
 | `.double`            | 8     | Flotante doble      |
 | `.ascii`             | n     | Cadena sin `\0`     |
-| `.asciz`             | n+1   | Cadena **con** `\0` |
+| `.asciz`             | n+1   | Cadena **con** `\0` |4
+
+
+
+------------------------------ DIRECCIONAMIENTO ------------------------------------------------
+$a vs a (Valor inmediato, valor etiqueta o variable): 
+$a es un tipo de dato inmediato, a es un address. 

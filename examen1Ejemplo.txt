@@ -1,3 +1,11 @@
+EXAMINAR DE UN ARREGLO CON EL DEBBUGER: 
+
+
+(gdb) x/1b (int8_t*) &x+2
+0x40401a:       -45
+
+
+
 codigo c: ------------------------------------------------------------------------------------------
 #include <stdio.h>
 #include <stdint.h>

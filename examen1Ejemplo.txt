@@ -29,15 +29,14 @@ int main()
 
 
 ----------------------------------------------------------------------------------
-
-
+SOLUCION (PASAR DE C A ASM ATT): 
 .data
 
     x: .byte 23,126,-45
-    y: .byte -45,4,103
+    z: .byte -45,4,103
     w: .long 0 
-    j: .byte 1 
-    //j: .byte 0
+    //j: .byte 1 
+    j: .byte 0
     fmt: .asciz "w = %d\n"
     
 .text
@@ -45,12 +44,21 @@ int main()
 main:
 	# your code goes here
 	
-	pushq   %rbx
+
+	#w=x[1] + z[j];
+	#TODO: cargar x[1] en registro cl y z[j] en registro sil, promover a 32 bits y sumar
 	
-	//w=x[1] + z[j];
-	//TODO: cargar x[1] en registro cl y z[j] en registro sil, promover a 32 bits y sumar
+	pushq %rbx 
 	
+	movb x+1, %cl 
+	movsbq j, %rax 
+	movb z(%rax), %sil  #se suele poner s en el mov cuando cuambio de tamaño el numero en bytes.
 	
+	movsbl %cl, %ecx
+	movsbl %sil, %esi 
+	
+	addl %ecx, %esi 
+	movl %esi, w 
 	
 	
 	
@@ -62,5 +70,6 @@ main:
 
 	//return 0;
 	xor	%eax, %eax
-	popq    rbx
+	
+	popq %rbx
 	ret

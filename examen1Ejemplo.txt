@@ -1,0 +1,23 @@
+codigo c: ------------------------------------------------------------------------------------------
+#include <stdio.h>
+#include <stdint.h>
+
+//Cualquier dato menor a 32 bits, lo que hace el compilador es subir todos los datos a 32 bits.
+
+int8_t x[3]={23,126,-45};
+int8_t z[3]={-45,4,103};
+int32_t w;
+int8_t j=1;             //prueba 1
+//int8_t j=0;             //prueba 2
+
+int main()
+{
+    w=x[1] + z[j];
+    
+    printf("w = %d\n",w);
+
+    return 0;
+}
+
+
+----------------------------------------------------------------------------------

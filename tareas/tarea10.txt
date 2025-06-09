@@ -20,3 +20,7 @@ int main()
 
     return 0;
 }
+
+
+Salida: i = 2: 193. Sale entero porque w esta declarado como entero entonces el compilador mocha la parte decimal
+-------------------------------------------------------------------------------------------------------------------------------

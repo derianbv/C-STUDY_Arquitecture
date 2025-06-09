@@ -36,10 +36,13 @@ main:
     //{
     else1:
         //w=x[i]+z[2];
-        //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar, EPP: esto se debe hacer porque si sumas dos enteros con signo puedes salirte del rango de -128 a 127 y esto puede dar overflow.  
-        movb x(%rax), %dl  
+        //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar
+        movb x(%rax), %dl
+        movsbl %dl, %edx 
         movb z+2, %bl 
-        
+        movsbl %dl, %ebx
+        addl %edx, %ebx 
+        movl %ebx, w 
          
          
     //}
@@ -49,6 +52,9 @@ main:
 	//printf("w = %d\n",w);
     //TODO:
     
+    movb $0, %eax
+    movl fmt, % 
+    call printf 
     
     
 	

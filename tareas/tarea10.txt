@@ -24,3 +24,58 @@ int main()
 
 Salida: i = 2: 193. Sale entero porque w esta declarado como entero entonces el compilador mocha la parte decimal
 -------------------------------------------------------------------------------------------------------------------------------
+.data
+    //TODO:
+//int8_t x[3]={23,126,-45};
+    x: .byte 23, 126, -45 
+//int8_t z[3]={-45,4,103};
+    z: .byte -45, 4, 103
+//int32_t w;
+    w: .byte 0 
+//float a=234.56;
+    a: .float 234.56 
+//int8_t i=2;             //prueba 1
+    i: .byte 1 
+//int8_t i=1;             //prueba 2
+    
+    fmt: .string "w = %d\n"
+    
+.text
+.global main
+main:
+	# your code goes here
+	
+	pushq   %rbx
+	
+	//a=a+x[i];
+	//TODO: cargar x[i] en registro bl, promover a 32 bits, convertir a float in xmm5 y realizar suma
+	movsbq i, %rax 
+	movb x(%rax), %bl 
+    movsbl %bl, %ebx
+    cvtsi2ss %ebx, %xmm5 
+    movss a, %xmm1 
+    addss %xmm1, %xmm5 
+    movss %xmm5, a
+
+    //w=a+z[1];
+    //TODO:cargar z[1] en registro cl, promover a 32 bits, convertir a float in xmm3 y realizar suma
+    movb z+1, %cl 
+    movsbl %cl, %ecx
+    cvtsi2ss %ecx, %xmm3 
+    addss %xmm5, %xmm3 
+    cvttss2si %xmm3, %eax // No puede ser directamente a memoria, pasa de float a int32 
+    movl %eax, w
+	
+	//printf("w = %d\n",w);
+    //TODO:
+    
+    movl w, %esi 
+    movl $fmt, %edi 
+    movl $0, %eax 
+    call printf 
+    
+	
+    //return 0;
+	xor	%eax, %eax
+	popq   %rbx
+	ret

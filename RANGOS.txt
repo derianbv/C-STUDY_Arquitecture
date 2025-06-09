@@ -11,3 +11,5 @@
 | `float`           | 32   | ±1.18×10⁻³⁸ a ±3.4×10³⁸ (≈ 7 dígitos)    | IEEE 754 (simple)   | `.float`                  |
 | `double`          | 64   | ±2.23×10⁻³⁰⁸ a ±1.8×10³⁰⁸ (≈ 15 dígitos) | IEEE 754 (doble)    | `.double`                 |
 | `long double`¹    | 80+  | hasta ±1.2×10⁴⁹³² (depende del sistema)  | IEEE 754 ext./varía | ❓ `.tfloat` (dependiente) |
+
+

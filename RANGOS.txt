@@ -1,0 +1,13 @@
+| Tipo C/C++        | Bits | Rango (aproximado)                       | Codificación usada  | Declaración en ASM AT\&T  |
+| ----------------- | ---- | ---------------------------------------- | ------------------- | ------------------------- |
+| `int8_t`          | 8    | -128 a 127                               | 🧠 Complemento a 2  | `.byte`                   |
+| `uint8_t`         | 8    | 0 a 255                                  | Binario puro        | `.byte`                   |
+| `int16_t`         | 16   | -32,768 a 32,767                         | Complemento a 2     | `.word`                   |
+| `uint16_t`        | 16   | 0 a 65,535                               | Binario puro        | `.word`                   |
+| `int32_t` / `int` | 32   | -2,147,483,648 a 2,147,483,647           | Complemento a 2     | `.long`                   |
+| `uint32_t`        | 32   | 0 a 4,294,967,295                        | Binario puro        | `.long`                   |
+| `int64_t`         | 64   | -9.2×10¹⁸ a 9.2×10¹⁸                     | Complemento a 2     | `.quad`                   |
+| `uint64_t`        | 64   | 0 a 1.84×10¹⁹                            | Binario puro        | `.quad`                   |
+| `float`           | 32   | ±1.18×10⁻³⁸ a ±3.4×10³⁸ (≈ 7 dígitos)    | IEEE 754 (simple)   | `.float`                  |
+| `double`          | 64   | ±2.23×10⁻³⁰⁸ a ±1.8×10³⁰⁸ (≈ 15 dígitos) | IEEE 754 (doble)    | `.double`                 |
+| `long double`¹    | 80+  | hasta ±1.2×10⁴⁹³² (depende del sistema)  | IEEE 754 ext./varía | ❓ `.tfloat` (dependiente) |

@@ -45,3 +45,12 @@ jb etiqueta = jump if below
 
 
 jnl: jump not less
+je: son iguales. 
+
+REGLA DE ORO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+| Escenario                                         | ¿Qué hacer?          |
+| ------------------------------------------------- | -------------------- |
+| Tal vez sí pueden ser negativos (signed)          | Usa `jg`, `jl`, etc. |
+| Solo deberías tratarlos como positivos (unsigned) | Usa `ja`, `jb`, etc. |
+

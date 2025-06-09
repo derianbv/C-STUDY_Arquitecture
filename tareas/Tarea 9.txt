@@ -3,8 +3,8 @@
     x: .byte 23,126,-45
     z: .byte -45,4,103
     w: .long 0 
-    i: .byte 1                  //prueba 1
-    //j: .byte 0                  //prueba 2
+    i: .byte 0                  //prueba 1
+    //i: .byte 0                  //prueba 2
     fmt: .asciz "w = %d\n"
     
 .text
@@ -30,17 +30,17 @@ main:
         movsbl %r8b, %r8d 
         addl $145, %r8d 
         movl %r8d, w 
-        
+        jmp endif1 
     //}
     //else
     //{
     else1:
         //w=x[i]+z[2];
-        //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar
+        //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar para evitar overflow 
         movb x(%rax), %dl
         movsbl %dl, %edx 
         movb z+2, %bl 
-        movsbl %dl, %ebx
+        movsbl %bl, %ebx
         addl %edx, %ebx 
         movl %ebx, w 
          
@@ -52,8 +52,10 @@ main:
 	//printf("w = %d\n",w);
     //TODO:
     
-    movb $0, %eax
-    movl fmt, % 
+
+    movl $fmt, %edi 
+    movl w, %esi 
+    movl $0, %eax
     call printf 
     
     

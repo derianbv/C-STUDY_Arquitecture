@@ -43,7 +43,7 @@ jb etiqueta = jump if below
      ja / jb                  jg / jl
 
 
-
+jmp: es el salto general. 
 jnl: jump not less
 je: son iguales. 
 

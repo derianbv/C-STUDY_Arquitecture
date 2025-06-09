@@ -1,0 +1,22 @@
+-------------------------------- C ----------------------------------------------------------
+#include <stdio.h>
+#include <stdint.h>
+
+int8_t x[3]={23,126,-45};
+int8_t z[3]={-45,4,103};
+int32_t w;
+float a=234.56;
+int8_t i=2;             //prueba 1
+//int8_t i=1;             //prueba 2
+
+int main()
+{
+
+    a=a+x[i];
+    
+    w=a+z[1];
+    
+    printf("w = %d\n",w);
+
+    return 0;
+}

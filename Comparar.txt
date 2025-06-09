@@ -8,6 +8,17 @@ jle etiqueta = jump if less or equal (igual que jng)
 
 jle etiqueta = jump if less 
 
+
+| Instrucción | Significado         | Equivalente en C |
+| ----------- | ------------------- | ---------------- |
+| `ja`        | jump if above       | `>`              |
+| `jb`        | jump if below       | `<`              |
+| `jae`       | jump if above/equal | `>=`             |
+| `jbe`       | jump if below/equal | `<=`             |
+
+
+
+
 comparando numeros Sin signo: ************************************************************************
 ja etiqueta = jump if above
 

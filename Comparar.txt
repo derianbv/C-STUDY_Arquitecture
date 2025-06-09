@@ -9,6 +9,14 @@ jle etiqueta = jump if less or equal (igual que jng)
 jle etiqueta = jump if less 
 
 
+| Instrucción | Significado     | Equivalente en C |
+| ----------- | --------------- | ---------------- |
+| `jg`        | jump if greater | `>`              |
+| `jl`        | jump if less    | `<`              |
+| `jge`       | jump if ≥       | `>=`             |
+| `jle`       | jump if ≤       | `<=`             |
+
+
 
 comparando numeros Sin signo: ************************************************************************
 ja etiqueta = jump if above

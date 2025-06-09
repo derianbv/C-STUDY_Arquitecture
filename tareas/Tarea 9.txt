@@ -1,0 +1,58 @@
+.data
+
+    x: .byte 23,126,-45
+    z: .byte -45,4,103
+    w: .long 0 
+    i: .byte 1                  //prueba 1
+    //j: .byte 0                  //prueba 2
+    fmt: .asciz "w = %d\n"
+    
+.text
+.global main
+main:
+	# your code goes here
+	
+	pushq   %rbx
+	
+    //if(x[i]>103)
+    //{
+    //TODO: cargar x[i] en registro dil
+    movsbq i, %rax 
+    movb x(%rax), %dil
+    cmpb $103, %dil 
+    jg then1 
+    jmp else1 
+    
+    then1:
+        //w=z[i]+145;
+        //TODO: cargar z[i] en r8b, promover a 32 bits y realizar suma
+        movb z(%rax), %r8b
+        movsbl %r8b, %r8d 
+        addl $145, %r8d 
+        movl %r8d, w 
+        
+    //}
+    //else
+    //{
+    else1:
+        //w=x[i]+z[2];
+        //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar
+        movb x(%rax), %dl 
+        movb z+2, %bl 
+        
+         
+         
+    //}
+    endif1:
+	
+	
+	//printf("w = %d\n",w);
+    //TODO:
+    
+    
+    
+	
+    //return 0;
+	xor	%eax, %eax
+	popq   %rbx
+	ret

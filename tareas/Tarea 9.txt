@@ -28,6 +28,7 @@ int main()
 
 -------------------------------------------------- ATT ------------------------------------------------------------------------------------
 
+
 .data
 
     x: .byte 23,126,-45
@@ -47,19 +48,19 @@ main:
     //if(x[i]>103)
     //{
     //TODO: cargar x[i] en registro dil
-    movsbq i, %rax 
-    movb x(%rax), %dil
-    cmpb $103, %dil 
-    jg then1 
+    movsbq i, %rax           // rax <-- (i) (64 bits)
+    movb x(%rax), %dil       // dil <-- (x[i]) (8 bits)
+    cmpb $103, %dil          // x[i] - 103 (32 bits)
+    jg then1                     
     jmp else1 
     
     then1:
         //w=z[i]+145;
         //TODO: cargar z[i] en r8b, promover a 32 bits y realizar suma
-        movb z(%rax), %r8b
-        movsbl %r8b, %r8d 
-        addl $145, %r8d 
-        movl %r8d, w 
+        movb z(%rax), %r8b   // rb8 <-- (z[i]) (8 bits)
+        movsbl %r8b, %r8d    // r8d <-- (z[i]) (32 bits) evitando Overflow
+        addl $145, %r8d      // r8d <-- ((145) + z[i]) (32 bits)
+        movl %r8d, w         // w <-- ((145) + z[i]) (32 bits)
         jmp endif1 
     //}
     //else
@@ -67,12 +68,12 @@ main:
     else1:
         //w=x[i]+z[2];
         //TODO: cargar x[i] en dl y z[2] en bl, promover a 32 bits y sumar para evitar overflow 
-        movb x(%rax), %dl
-        movsbl %dl, %edx 
-        movb z+2, %bl 
-        movsbl %bl, %ebx
-        addl %edx, %ebx 
-        movl %ebx, w 
+        movb x(%rax), %dl    // dl <-- (x[i]) (8 bits)
+        movsbl %dl, %edx     // edx <-- (x[i]) (32 bits)
+        movb z+2, %bl        // bl <-- (z[2]) (8 bits)
+        movsbl %bl, %ebx     // ebx <-- (z[2]) (32 bits)
+        addl %edx, %ebx      // ebx <-- (z[2] + x[w])  (32 bits)   
+        movl %ebx, w         // w <-- (z[2] + x[w])  (32 bits) 
          
          
     //}
@@ -83,9 +84,9 @@ main:
     //TODO:
     
 
-    movl $fmt, %edi 
-    movl w, %esi 
-    movl $0, %eax
+    movl $fmt, %edi  // edi <-- fmt
+    movl w, %esi     // esi <-- (w)
+    movl $0, %eax    // eax <-- (0)
     call printf 
     
     

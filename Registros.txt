@@ -7,3 +7,9 @@
 | 16-bit     | AX     | Parte baja 16 bits de EAX    |
 | 8-bit alto | AH     | Bits 8-15 (alta parte de AX) |
 | 8-bit bajo | AL     | Bits 0-7 (baja parte de AX)  |
+
+Faltan los registos de mayor rango, en general los que terminen en L significa que son LOW, primeros 8 bits. 
+los de que terminan en H son High o sea los siguientes 8 bits. 
+los que son Letra + X significa que almancenan 16 bits. 
+Los que son E Letra X son registros de 32 bits. 
+Finalmente los R letra X son registros de 

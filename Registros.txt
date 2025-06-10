@@ -12,4 +12,4 @@ Faltan los registos de mayor rango, en general los que terminen en L significa q
 los de que terminan en H son High o sea los siguientes 8 bits. 
 los que son Letra + X significa que almancenan 16 bits. 
 Los que son E Letra X son registros de 32 bits. 
-Finalmente los R letra X son registros de 
+Finalmente los R letra X son registros de 64 bits 

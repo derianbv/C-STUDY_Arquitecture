@@ -1,0 +1,29 @@
+.data
+    x: .byte 5
+    fmt: .asciz "a = %d\n"
+.text
+.global main
+main:
+	# your code goes here
+	pushq   %rbx
+	
+	subq    $16,%rsp        //reserve space for local variables and parameters (16 bytes)
+	
+	//int8_t a=3;
+	movb    $3,15(%rsp)     //local a at rsp+15  :  a <-- 3
+	//a=a+x;
+	movsbl  15(%rsp),%eax   //eax <-- (a)
+	movsbl  x,%edx          //eax <-- (x)
+	addl    %edx,%eax       //eax <-- (a) + (x)
+	movb    %al,15(%rsp)    //a <-- (a) + (x)
+	
+	//printf("a = %d\n",a);
+	movsbl  15(%rsp),%esi 
+	movl    $fmt,%edi
+	movl    $0,%eax
+	call    printf
+	
+	xor	%eax, %eax
+	addq    $16,%rsp
+	popq    %rbx
+	ret

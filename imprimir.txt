@@ -1,0 +1,43 @@
+https://onlinegdb.com/KevQbbU6K 
+
+Variable x:
+
+(gdb) p/x (void*)&x			//imprimir la dirección de x
+$1 = 0x404018
+
+(gdb) p/d *((int8_t*)&x)		//imprimir el valor(contenido) de x as signed decimal	
+$2 = -5
+
+(gdb) x/1bd (int8_t*)&x			//examinar el valor(contenido) de x as signed decimal
+0x404018:       -5
+
+(gdb) p/u *((uint8_t*)&x)		//print el valor(contenido) de x as unsigned decimal
+$7 = 251
+
+(gdb) x/1bu (uint8_t*)&x		//examinar el valor(contenido) de x as unsigned decimal
+0x404018:       251
+
+(gdb) p/d (int8_t)x			//imprimir el valor(contenido) de x as signed decimal
+$1 = -5
+
+(gdb) p/u (uint8_t)x                                   //print el valor(contenido) de x as unsigned decimal
+$8 = 251
+
+
+
+
+
+
+Variable pointer p:
+
+(gdb) p/x (void*)&p			//imprimir la dirección de p (ubicación de p)
+$1 = 0x40401a
+
+(gdb) p/x (void*)p                                      //imprimir el contenido de p (dirección a la que apunta)
+$3 = 0x404018
+
+(gdb) p/d *((int8_t*)p)                            //imprimir el contenido de la posición apuntada por p 
+$4 = -5
+
+(gdb) x/1bd (int8_t*)p                            //examinar el contenido de la posición apuntada por p
+0x404018:       -5

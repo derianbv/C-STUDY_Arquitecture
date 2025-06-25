@@ -6,3 +6,18 @@ Tarea 11: https://onlinegdb.com/SYA__psHk
  tarea 11: https://onlinegdb.com/tyrda4qCs
  tarea 12: https://onlinegdb.com/9PgnEd13I
 el código base de las tareas es el quinto del Word de punteros: https://onlinegdb.com/3GSOqpwpa
+
+
+
+--------------------------------
+
+
+En C:
+
+Tarea11 - Maximo: https://onlinegdb.com/M-O6Qt5AB
+Tarea12 - Minimo: https://onlinegdb.com/Foc01Z64w
+
+En Assembly: 
+
+Tarea11: https://onlinegdb.com/JHx3ojbMi
+Tarea12: https://onlinegdb.com/s10NbUT0F

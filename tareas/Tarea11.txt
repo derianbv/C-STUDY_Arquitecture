@@ -21,3 +21,70 @@ En Assembly:
 
 Tarea11: https://onlinegdb.com/JHx3ojbMi
 Tarea12: https://onlinegdb.com/s10NbUT0F
+
+
+
+.data
+    //int32_t x[3]={257684,-293205,62870},y;
+    x: .long 257684,-293205,62870
+    //int32_t *p;
+    p: .quad 0
+    //int32_t max;
+    max: .long 0
+    //int8_t i=0;
+    i: .byte 1
+    fmt: .asciz "max = %d\n"
+.text
+.global main
+main:
+	# your code goes here
+	
+	pushq %rbx 
+	
+	//p=x;
+	movq    $x,p // Apunta p* -> $x
+	
+	//max = p[0];
+    movq    p, %rax //Mueve el valor del puntero a %rax (64 bits por que es direccion) rax <- (p)  
+    movl    (%rax), %eax // Mueve el valor de %rax a %eax usando (), pero rax guarda el valor de p y p tiene la direccion de x+0, es decir que va a la direccion de 
+    //x+0 y guarda lo su valor: "257684"
+    movl    %eax, max // mueve el valor de x+0 a max (32 bits, long)
+    
+    
+    //while(i<3)
+    //{
+    initw1:
+        cmpb    $3,i // compara i que vale 0 con 3 
+        jnl     endw1 //si i no es mejor salte a el final, como empieza en 0 es menor hasta que llegue a 2: 0,1,2 (3 iteraciones)
+        
+        //if(max<p[i])
+        //{
+        
+        movsbq  i,%rbx // pasa 0 en bits de 8bits a 64 bits para que sea un sumador en escencia (indice es sumador). x+i, es decir que se mueva a la posición x[i]
+        movq    p,%rcx // mueve lo que apunta p a rcx, p -> $x+0 
+        movl    (%rcx,%rbx,4),%edx // guarde en edx 
+        cmpl    %edx, max
+        jnl endif1
+        
+        // max = p[i];
+        
+        movl    %edx, max
+        
+        //}
+        endif1:
+        //i++;
+        incb     i
+        jmp     initw1
+    //}
+    endw1:
+
+	//printf("max = %d\n",max); 
+	movl    max,%esi 
+	movl    $fmt,%edi
+	movl    $0,%eax
+	call    printf
+	
+	//return 0;
+	xor	%eax, %eax
+	popq %rbx
+	ret

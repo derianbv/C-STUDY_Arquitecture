@@ -93,8 +93,6 @@ main:
     popq %rbx 
     ret 
 ------------------------------------------------------------------------------- TAREA 12 -----------------------------------------------------------
-
-
 //-no-pie -z noexecstack
 
 .data
@@ -133,16 +131,16 @@ main:
     cmpb $3, i  
     jnl endWhile 
     
-    // if(max<p[i]) 
+    // if(min>p[i]) 
     
     
         movsbq i, %rax // rax <- (i) (64 bits)
         movl (%rbx, %rax, 4), %ecx // ecx <-- (p+i) <--> ecx <-- (x+i) (32 bits)
         cmpl %ecx, min 
         jl endIf 
-        //   max = p[i];
+        //   min = p[i];
         
-        movl %ecx, min // max <-- (x+i) (32 bits)
+        movl %ecx, min // min <-- (x+i) (32 bits)
          
         
     endIf: 
@@ -154,9 +152,9 @@ main:
 
     endWhile: 
     
-    //printf("max = %d\n",max); 
+    //printf("min = %d\n",max); 
     
-    movl min, %esi // esi <-- (max) (32 bits)
+    movl min, %esi // esi <-- (min) (32 bits)
     movl $fmt, %edi // edi <-- fmt (32 bits)
     movl $0, %eax // eax <-- (0) (32 bits)
     call printf
@@ -164,5 +162,4 @@ main:
     xor %eax, %eax 
     popq %rbx 
     ret 
-
 

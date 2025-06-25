@@ -22,7 +22,7 @@ En Assembly:
 Tarea11: https://onlinegdb.com/JHx3ojbMi
 Tarea12: https://onlinegdb.com/s10NbUT0F
 
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------- TAREA 11 -----------------------------------------------------------
 //-no-pie -z noexecstack
 
 .data
@@ -92,3 +92,77 @@ main:
     xor %eax, %eax 
     popq %rbx 
     ret 
+------------------------------------------------------------------------------- TAREA 12 -----------------------------------------------------------
+
+
+//-no-pie -z noexecstack
+
+.data
+//int32_t x[3]={257684,-293205,62870};
+    x: .long   62870,-293205, 257684
+//int32_t *p;
+    p: .quad 0 
+//int32_t max; 
+    min: .long 0     
+//int8_t i=0;
+    i: .byte 0 
+//int main()
+    fmt: .asciz "min = %d\n"
+
+.text
+.global main 
+
+main: 
+
+    pushq %rbx 
+    
+    //p=x;
+    
+    movq $x, %rbx  // rbx <-- x+0 (64 bits)
+    movq %rbx, p  // p <-- x+0 (64 bits)
+     
+    //max=p[0];
+    
+    movl (%ebx), %edx //edx <-- (p) <--> min <- x+0 (32 bits de rbx)
+    movl %edx, min    // min <-- (p) <--> min <- x+0 (32 bits)
+    
+    //while(i<3)
+ 
+    while:   
+    
+    cmpb $3, i  
+    jnl endWhile 
+    
+    // if(max<p[i]) 
+    
+    
+        movsbq i, %rax // rax <- (i) (64 bits)
+        movl (%rbx, %rax, 4), %ecx // ecx <-- (p+i) <--> ecx <-- (x+i) (32 bits)
+        cmpl %ecx, min 
+        jl endIf 
+        //   max = p[i];
+        
+        movl %ecx, min // max <-- (x+i) (32 bits)
+         
+        
+    endIf: 
+        
+        //i++ 
+        
+        incb i // i <-- (i+1) (8 bits)
+        jmp while 
+
+    endWhile: 
+    
+    //printf("max = %d\n",max); 
+    
+    movl min, %esi // esi <-- (max) (32 bits)
+    movl $fmt, %edi // edi <-- fmt (32 bits)
+    movl $0, %eax // eax <-- (0) (32 bits)
+    call printf
+
+    xor %eax, %eax 
+    popq %rbx 
+    ret 
+
+

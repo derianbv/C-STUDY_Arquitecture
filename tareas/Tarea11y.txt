@@ -46,56 +46,49 @@ main:
     
     //p=x;
     
-    movq $x, %rbx 
-    movq %rbx, p 
-    
+    movq $x, %rbx  // rbx <-- x+0 (64 bits)
+    movq %rbx, p  // p <-- x+0 (64 bits)
+     
     //max=p[0];
     
-    movl (%ebx), %edx
-    movl %edx, max    
+    movl (%ebx), %edx //edx <-- (p) (32 bits de rbx)
+    movl %edx, max    // max <-- (p) <--> max <- x+0 (32 bits)
     
     //while(i<3)
  
     while:   
     
-    cmpb $3, i 
+    cmpb $3, i  
     jnl endWhile 
     
     // if(max<p[i]) 
     
     
-        movsbq i, %rax 
-        movl (%rbx, %rax, 4), %ecx 
+        movsbq i, %rax // rax <- (i) (64 bits)
+        movl (%rbx, %rax, 4), %ecx // ecx <-- (p+i) <--> ecx <-- (x+i) (32 bits)
         cmpl %ecx, max 
         jnl endIf 
         //   max = p[i];
         
-        movl %ecx, max
+        movl %ecx, max // max <-- (x+i) (32 bits)
          
         
     endIf: 
         
         //i++ 
         
-        incb i 
+        incb i // i <-- (i+1) (8 bits)
         jmp while 
 
     endWhile: 
     
     //printf("max = %d\n",max); 
     
-    movl max, %esi 
-    movl $fmt, %edi 
-    movl $0, %eax 
+    movl max, %esi // esi <-- (max) (32 bits)
+    movl $fmt, %edi // edi <-- fmt (32 bits)
+    movl $0, %eax // eax <-- (0) (32 bits)
     call printf
 
     xor %eax, %eax 
     popq %rbx 
     ret 
-
-
-	
-	//return 0;
-	xor	%eax, %eax
-	popq %rbx
-	ret

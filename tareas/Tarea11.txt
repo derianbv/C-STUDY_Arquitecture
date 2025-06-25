@@ -22,7 +22,7 @@ En Assembly:
 Tarea11: https://onlinegdb.com/JHx3ojbMi
 Tarea12: https://onlinegdb.com/s10NbUT0F
 
-
+-------------------------------------------------------------------------------
 
 .data
     //int32_t x[3]={257684,-293205,62870},y;

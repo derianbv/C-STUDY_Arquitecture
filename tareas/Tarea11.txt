@@ -23,10 +23,9 @@ Tarea11: https://onlinegdb.com/JHx3ojbMi
 Tarea12: https://onlinegdb.com/s10NbUT0F
 
 -------------------------------------------------------------------------------
-
 .data
     //int32_t x[3]={257684,-293205,62870},y;
-    x: .long 257684,-293205,62870
+    x: .long -293205,62870,257684
     //int32_t *p;
     p: .quad 0
     //int32_t max;
@@ -62,18 +61,18 @@ main:
         
         movsbq  i,%rbx // pasa 0 en bits de 8bits a 64 bits para que sea un sumador en escencia (indice es sumador). x+i, es decir que se mueva a la posición x[i]
         movq    p,%rcx // mueve lo que apunta p a rcx, p -> $x+0 
-        movl    (%rcx,%rbx,4),%edx // guarde en edx 
-        cmpl    %edx, max
-        jnl endif1
+        movl    (%rcx,%rbx,4),%edx // guarde en edx p+i*4 o x+i // movl (base, index, scale) // notacion para puntero
+        cmpl    %edx, max // compara edx con max, es decir x+i con max 
+        jnl endif1 //compare, si x+i no es menor que max es porque es mayor y salta a endif 
         
         // max = p[i];
         
-        movl    %edx, max
+        movl    %edx, max 
         
         //}
         endif1:
         //i++;
-        incb     i
+        incb     i //incrementar i++ 
         jmp     initw1
     //}
     endw1:

@@ -1,3 +1,7 @@
+IMPLEMENTACION DE ARRELGLOS LOCALES (STACK). 
+
+
+
 Codigo en C -----------------------------------------------------------
 
 #include <stdio.h>

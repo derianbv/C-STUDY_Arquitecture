@@ -1,0 +1,27 @@
+-------------------------------- C -----------------------------------------------------------------
+#include <stdio.h>
+#include <stdint.h>
+
+int16_t x=5;
+
+int8_t i=2;     //prueba 1
+//int8_t i=0;     //prueba 2
+
+int main()
+{
+    int16_t *p=NULL;                   //<--> int16_t *p=(*void)0;  => p is a null pointer: the pointer is not pointing to any valid data
+    int16_t a[3]={1,2,3};
+    int16_t b[3]={4,5,6};
+
+    p=a;
+    
+    b[2]=b[1]+p[i];
+    
+    x=p[i]+b[i];
+
+    printf("b[2] = %d\n",b[2]);
+    printf("x = %d\n",x);
+    
+    return 0;
+}
+---------------------------------------------- asm ----------------------------------------------------------

@@ -26,13 +26,12 @@ int main()
 }
 ---------------------------------------------- asm ----------------------------------------------------------
 https://onlinegdb.com/i0JLxK_CR
-
 .data
-    x:   .word 5                    // int16_t  x  = 5 (16 bits)
-    i:   .byte 2                    // uint8_t  i  = 2 (8 bits)  //prueba 1
-    //i: .byte 0                    // uint8_t  i  = 0 (8 bits)  //prueba 2
-    fmtb: .string "b[2] = %d\n"     // formato b
-    fmtx: .string "x = %d\n"        // formato x
+    x:   .word 5                   
+    i:   .byte 2                    //prueba 1
+    //i: .byte 0                      //prueba 2
+    fmtb: .string "b[2] = %d\n"     
+    fmtx: .string "x = %d\n"        
 
 .text
 .global main
@@ -64,10 +63,10 @@ main:
     movq %rbx, -8(%rbp)             // (p)  <-- a
 
     // b[2] = b[1] + p[i];
-    movzbl i(%rip), %eax            // eax <-- (i) (8 -> 32 bits, promoción)
+    movsbq  i, %rax            // eax <-- (i) (8 -> 32 bits, promoción)
     movq   -8(%rbp), %rcx           // rcx <-- p
     movswl (%rcx,%rax,2), %r8d      // r8d <-- (p[i]) (16 -> 32 bits, promoción)
-    movswl -18(%rbp), %r9d          // r9d <-- (b[1]) (16 -> 32 bits, promoción)
+    movswl -18(%rbp), %r9d           // r9d <-- (b[1]) (16 -> 32 bits, promoción)
     addl   %r8d, %r9d               // r9d <-- (b[1]) + (p[i])
     movw   %r9w, -16(%rbp)          // (b[2]) <-- r9w (32 -> 16 bits, demotion)
 

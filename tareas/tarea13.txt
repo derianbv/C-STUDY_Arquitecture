@@ -25,6 +25,8 @@ int main()
     return 0;
 }
 ---------------------------------------------- asm ----------------------------------------------------------
+https://onlinegdb.com/i0JLxK_CR
+
 .data
     x:   .word 5                    // int16_t  x  = 5 (16 bits)
     i:   .byte 2                    // uint8_t  i  = 2 (8 bits)  //prueba 1

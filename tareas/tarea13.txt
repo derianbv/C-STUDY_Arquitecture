@@ -26,7 +26,58 @@ int main()
 }
 ---------------------------------------------- asm ----------------------------------------------------------
 
+.data
 
+    x: .word   5
+    i: .byte   2                    //prueba 1
+    //i: .byte   0                    //prueba 2
+    fmtb: .string "b[2] = %d\n"
+    fmtx: .string "x = %d\n"
+
+.text
+.global main
+main:
+	# your code goes here
+	
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $32, %rsp
+    
+    //int16_t *p=NULL;
+    //TODO: start address of pointer p: rbp-8
+
+    movq $0, -8(%rbp)
+
+    //int16_t a[3]={1,2,3};  // 6 bytes 
+    //TODO: start address of array a: rbp-14
+    
+    movw $1, -14(%rbp)
+    movw $2, -12(%rbp)
+    movw $3, -10(%rbp)
+    
+
+    //int16_t b[3]={4,5,6};
+    //TODO: start address of array b: rbp-20
+    
+    movw $4, -20(%rbp)
+    movw $5, -18(%rbp)
+    movw $6, -16(%rbp)
+    
+    //TODO: do the rest of coding:
+    
+    //p=a; 
+    
+    leaq -14(%rbp), %rbx 
+    movq %rbx, -8(%rbp)
+    
+    //b[2]=b[1]+p[i];
+    
+
+
+    xorl    %eax, %eax
+    addq    $32,%rsp
+    popq    %rbp
+	ret
 
 
 

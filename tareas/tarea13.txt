@@ -25,7 +25,6 @@ int main()
     return 0;
 }
 ---------------------------------------------- asm ----------------------------------------------------------
-
 .data
 
     x: .word   5
@@ -72,12 +71,30 @@ main:
     
     //b[2]=b[1]+p[i];
     
+    movq i, %rax 
+    movq -8(%rbp), %rcx
+    movswl (%rcx, %rax, 2), %r8d 
+    movswl -18(%rbp), %r9d 
+    addl %r8d, %r9d  
+    movw %r9w, -16(%rbp)
 
+   // x=p[i]+b[i];
+    
+    movq -20(%rbp), %r9    
+    movswl (%r9, %rax, 2), %r11d
+    addl %r8d, %r11d
+    movw %r11d, x 
+
+//  fmtb: .string "b[2] = %d\n"
+    
+    movswl -18(%rbp), %esi 
+    movl $fmtb, %edi 
+    movl $0, %eax 
+    call printf
+    
+    
 
     xorl    %eax, %eax
     addq    $32,%rsp
     popq    %rbp
 	ret
-
-
-

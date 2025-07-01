@@ -26,55 +26,55 @@ int main()
 }
 ---------------------------------------------- asm ----------------------------------------------------------
 .data
-    x:   .word 5                    // int16_t x   = 5
-    i:   .byte 2                    // uint8_t  i  = 2   (prueba 1)
-    //i: .byte 0                    // uint8_t  i  = 0   (prueba 2)
+    x:   .word 5                    // int16_t  x  = 5   (16 bits)
+    i:   .byte 2                    // uint8_t  i  = 2   (8  bits)
+    //i: .byte 0                    // uint8_t  i  = 0   (8  bits)
     fmtb: .string "b[2] = %d\n"     // formato b
     fmtx: .string "x = %d\n"        // formato x
 
 .text
 .global main
 main:
-    pushq %rbp                      // stack <-- (rbp)
-    movq  %rsp, %rbp                // rbp   <-- rsp
-    subq  $32, %rsp                 // rsp   <-- rsp - 32
+    pushq %rbp                      // salva rbp  (64 bits)
+    movq  %rsp, %rbp                // rbp <-- rsp  (64 bits)
+    subq  $32, %rsp                 // reserva 32 B en la pila
 
-    movq  $0, -8(%rbp)              // (p)   <-- 0
+    movq  $0, -8(%rbp)              // (p) <-- 0 (64 bits, NULL)
 
-    movw  $1, -14(%rbp)             // (a[0]) <-- 1
-    movw  $2, -12(%rbp)             // (a[1]) <-- 2
-    movw  $3, -10(%rbp)             // (a[2]) <-- 3
+    movw  $1, -14(%rbp)             // (a[0]) <-- 1  (16 bits)
+    movw  $2, -12(%rbp)             // (a[1]) <-- 2  (16 bits)
+    movw  $3, -10(%rbp)             // (a[2]) <-- 3  (16 bits)
 
-    movw  $4, -20(%rbp)             // (b[0]) <-- 4
-    movw  $5, -18(%rbp)             // (b[1]) <-- 5
-    movw  $6, -16(%rbp)             // (b[2]) <-- 6
+    movw  $4, -20(%rbp)             // (b[0]) <-- 4  (16 bits)
+    movw  $5, -18(%rbp)             // (b[1]) <-- 5  (16 bits)
+    movw  $6, -16(%rbp)             // (b[2]) <-- 6  (16 bits)
 
-    leaq  -14(%rbp), %rbx           // rbx  <-- a
-    movq  %rbx, -8(%rbp)            // (p)  <-- a
+    leaq  -14(%rbp), %rbx           // rbx <-- a        (64-bit dirección)
+    movq  %rbx, -8(%rbp)            // (p) <-- a        (64 bits)
 
-    movzbl i(%rip), %eax            // eax  <-- (i)
-    movq   -8(%rbp), %rcx           // rcx  <-- p
-    movswl (%rcx,%rax,2), %r8d      // r8d  <-- (p[i])
-    movswl -18(%rbp), %r9d          // r9d  <-- (b[1])
-    addl   %r8d, %r9d               // r9d  <-- (b[1]) + (p[i])
-    movw   %r9w, -16(%rbp)          // (b[2]) <-- (b[1]) + (p[i])
+    movzbl i(%rip), %eax            // eax <-- (i)      (8→32 bits, zero-extend = promoción)
+    movq   -8(%rbp), %rcx           // rcx <-- p        (64 bits)
+    movswl (%rcx,%rax,2), %r8d      // r8d <-- (p[i])   (16→32 bits, sign-extend = promoción)
+    movswl -18(%rbp), %r9d          // r9d <-- (b[1])   (16→32 bits, sign-extend = promoción)
+    addl   %r8d, %r9d               // r9d <-- (b[1]) + (p[i]) (32-bit suma)
+    movw   %r9w, -16(%rbp)          // (b[2]) <-- r9w   (32→16 bits, demotion)
 
-    leaq  -20(%rbp), %r10           // r10  <-- b
-    movswl (%r10,%rax,2), %r11d     // r11d <-- (b[i])
-    addl   %r8d, %r11d              // r11d <-- (b[i]) + (p[i])
-    movw   %r11w, x                 // (x)  <-- (b[i]) + (p[i])
+    leaq  -20(%rbp), %r10           // r10 <-- b        (64-bit dirección)
+    movswl (%r10,%rax,2), %r11d     // r11d <-- (b[i])  (16→32 bits, sign-extend = promoción)
+    addl   %r8d, %r11d              // r11d <-- (b[i]) + (p[i]) (32-bit suma)
+    movw   %r11w, x                 // (x) <-- r11w     (32→16 bits, demotion)
 
-    movswl -16(%rbp), %esi          // esi  <-- (b[2])
-    movl   $fmtb, %edi              // edi  <-- fmtb
-    movl   $0, %eax                 // eax  <-- 0
-    call   printf                   // call printf
+    movswl -16(%rbp), %esi          // esi <-- (b[2])   (16→32 bits, sign-extend = promoción)
+    movl   $fmtb, %edi              // edi <-- fmtb     (32-bit dirección absoluta)
+    movl   $0, %eax                 // eax <-- 0        (var-args ABI)
+    call   printf                   // imprime b[2]
 
-    movswl x, %esi                  // esi  <-- (x)
-    movl   $fmtx, %edi              // edi  <-- fmtx
-    movl   $0, %eax                 // eax  <-- 0
-    call   printf                   // call printf
+    movswl x, %esi                  // esi <-- (x)      (16→32 bits, sign-extend = promoción)
+    movl   $fmtx, %edi              // edi <-- fmtx     (32-bit dirección absoluta)
+    movl   $0, %eax                 // eax <-- 0
+    call   printf                   // imprime x
 
-    xorl   %eax, %eax               // eax  <-- 0
-    addq   $32, %rsp                // rsp  <-- rsp + 32
-    popq   %rbp                     // rbp  <-- (stack)
+    xorl   %eax, %eax               // eax <-- 0  (valor de retorno)
+    addq   $32, %rsp                // libera 32 B de pila
+    popq   %rbp                     // restaura rbp
     ret

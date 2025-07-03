@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdint.h>
+
+void foo(int8_t *p);
+
+int main()
+{
+    int8_t a=5;
+    
+    printf("a = %d\n",a);
+    
+    foo(&a);
+    
+    printf("a = %d\n",a);
+
+    return 0;
+}
+
+void foo(int8_t *p)
+{
+    *p=9;
+}

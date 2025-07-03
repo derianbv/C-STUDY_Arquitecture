@@ -1,3 +1,57 @@
+.data
+    fmtb:   .asciz "b = %d\n"
+.text
+.global main
+main:
+	
+	pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $16, %rsp
+    
+    // int8_t a=5,b=7;
+    movb    $5, -1(%rbp)
+    movb    $7, -2(%rbp)
+    
+    // b=foo(a);
+    movsbq  -1(%rbp), %rdi
+    nop
+    call    foo
+    
+    movb    %al, -2(%rbp)
+    
+    // printf("b = %d\n",b);
+    movsbl  -2(%rbp), %esi
+    movl    $fmtb, %edi
+    call    printf
+    
+	
+	xor	%eax, %eax
+	addq    $16, %rsp
+	popq    %rbp
+	ret
+
+foo:
+    pushq   %rbp
+    movq    %rsp, %rbp
+    subq    $16, %rsp
+    
+    // int8_t x=9;
+    movb    $9, -1(%rbp)
+    movb    %dil, -15(%rbp)
+    
+    
+    // return q+x;
+    movsbl  -15(%rbp), %eax     
+    movsbl  -1(%rbp), %ecx     
+    addl     %ecx, %eax
+
+    addq    $16, %rsp
+    popq   %rbp
+
+    ret
+
+
+-----------------------------------------------------------------------
 #include <stdio.h>
 #include <stdint.h>
 

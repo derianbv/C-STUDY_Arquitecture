@@ -1,76 +1,64 @@
 .data
-    fmtb:   .asciz "b = %d\n"
+
+    fmtb: .asciz "b = %d"
+
 .text
 .global main
 main:
-	
-	pushq   %rbp
-    movq    %rsp, %rbp
-    subq    $16, %rsp
     
-    // int8_t a=5,b=7;
-    movb    $5, -1(%rbp)
-    movb    $7, -2(%rbp)
+    pushq %rbp
+    movq %rsp, %rbp
+    subq $16, %rsp
     
-    // b=foo(a);
-    movsbq  -1(%rbp), %rdi
-    nop
-    call    foo
+    //int8_t a=5,b=7;
     
-    movb    %al, -2(%rbp)
+    movb $5, -1(%rbp) //a
+    movb $7, -2(%rbp)
     
-    // printf("b = %d\n",b);
-    movsbl  -2(%rbp), %esi
-    movl    $fmtb, %edi
-    call    printf
+    //b=foo(a);
     
-	
-	xor	%eax, %eax
-	addq    $16, %rsp
-	popq    %rbp
-	ret
+    movsbq -1(%rbp), %rax //pasar empujando a la pila
+    pushq %rax
+    call foo
+    popq %rcx
+    movb %al, -2(%rbp)
+    
+    movsbl -2(%rbp), %esi
+    movl $fmtb, %edi
+    movl $0, %eax
+    call printf
+    
+    xor %eax, %eax
+    addq $16, %rsp
+    popq %rbp
+    ret
+    
 
-foo:
-    pushq   %rbp
-    movq    %rsp, %rbp
-    subq    $16, %rsp
-    
-    // int8_t x=9;
-    movb    $9, -1(%rbp)
-    movb    %dil, -15(%rbp)
-    
-    
-    // return q+x;
-    movsbl  -15(%rbp), %eax     
-    movsbl  -1(%rbp), %ecx     
-    addl     %ecx, %eax
+//int8_t foo(int8_t q)
+//{    
 
-    addq    $16, %rsp
-    popq   %rbp
+foo: 
+    //Prólogo
+    pushq %rbp
+    movq %rsp, %rbp
+    subq $8, %rsp
+    
+    //int8_t x=9;
+    movb $9, -1(%rbp) // al final se pueden poner donde sea en el espacio reservado
+    
+    movb 16(%rbp), %al
+    movb %al, -7(%rbp)    
+    //return q+x; // guarda q+x en %rax
+    
+    // todo desde acá es "return q+x"
+    movsbl -7(%rbp), %eax
+    movsbl -1(%rbp), %ecx
+    
+    addl    %ecx, %eax
+    movslq  %eax, %rax
+    
+    //Epílogo
+    addq $8, %rsp
+    popq %rbp
 
     ret
-
-
------------------------------------------------------------------------
-#include <stdio.h>
-#include <stdint.h>
-
-void foo(int8_t *p);
-
-int main()
-{
-    int8_t a=5;
-    
-    printf("a = %d\n",a);
-    
-    foo(&a);
-    
-    printf("a = %d\n",a);
-
-    return 0;
-}
-
-void foo(int8_t *p)
-{
-    *p=9;
-}

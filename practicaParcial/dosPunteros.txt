@@ -29,5 +29,111 @@ int main() {
 
 ---------------------------------------- ASM--------------------------------------------------------------------------------
 
+.data
+ //int8_t i = 1;            // índice global i
+    i: .byte 1 
+ //int8_t j = 2;            // índice global j
+    j: .byte 2 
+ //int16_t res1;            // resultado global 1
+    res1: .word 0 
+ 
+ //int16_t res2;            // resultado global 2
+    res2: .word 0 
+    
+//printf("res1 = %d\n", res1);
+    fmt1: .string "res1 = %d\n"
+    
+//pintf("res2 = %d\n", res2);
+    fmt2: .string "res2 = %d\n"
+    
+.text
+.global main
+main:
+//pasos: 1. Salvar rbp, y alinear el stack 
+//paso: 2. calcular cuanto espacio ocupan mis variables locales para alinear el stack y darles cabida en la memoria stack. 
 
+    pushq %rbp //salvamos rbp para poder usar el registro en el programa (-8 bytes al stack: desalineado)
+    movq %rsp, %rbp // seteamos el inicio del stack libre en rbp 
+    subq $8, %rsp  // rsp que es una adress - 8bytes o sea que se mueva hacia abajo 8 
+    subq $48, %rsp 
+    
+	//int16_t a[5] = {2, 4, 6, 8, 10}; // ocupa 10 bytes, o sea 10 espacios de memoria () (-1 a -10)
+
+    //siempre empezar desde el primero
+    movw $2, -10(%rbp)
+    movw $4, -8(%rbp)
+    movw $6, -6(%rbp)
+    movw $8, -4(%rbp)
+    movw $10, -2(%rbp)
+    
+
+    //int16_t b[5] = {1, 3, 5, 7, 9}; // ocupa 10 bytes, o sea 10 espacios de memoria () (-11, -20)
+    
+    movw $1, -20(%rbp)
+    movw $3, -18(%rbp)
+    movw $5, -16(%rbp)
+    movw $7, -14(%rbp)
+    movw $7, -12(%rbp)
+
+    //int16_t *p = a;       // puntero local a, ocupa 8 espacios en memoria (8*8 = 64 bits) (-20,-28)
+    
+    //para leaq, lo que primero hallamos es la direccion de la etiqueta apuntada
+    //en este caso buscamos a $a, (rbp-9 = $a) --> %rbx. en rbx está un numero de 64 bits (8 bytes) que guarda la direccion de a 
+    leaq -10(%rbp), %rbx
+    movq %rbx, -28(%rbp)
+    
+    //int16_t *q = b;       // puntero local b, ocupa 8 espacios en memoria (8*8 = 64 bits) (-29,-36)
+    //TOTAL: 26 espacios en memoria que necesito
+    
+    leaq -20(%rbp), %rcx
+    movq %rcx, -36(%rbp)
+
+
+    // operación 1: suma de p[i] + q[j]
+    
+    //p[i]
+    movsbq i, %r8 
+    movswl (%rbx,%r8,2), %eax
+    //q[i]    
+    movsbq j, %r9
+    movswl (%rcx,%r9,2), %edx
+    // p[i] + q[j]
+    addl %eax, %edx
+    //res1 = p[i] + q[j];
+    movw %dx, res1
+    
+
+    // operación 2: resta de p[j] - q[i]
+    //res2 = p[j](6) - q[i](3);
+    
+    //p[j]
+    movswl (%rbx,%r9,2), %eax
+    //q[i]    
+    movswl (%rcx,%r8,2), %edx
+    // p[j] - q[i]
+    subl %edx, %eax
+    //res2 = p[j] - q[i];
+    movw %dx, res2
+    
+    
+    // imprimir res1 y res2 por separado
+    //printf("res1 = %d\n", res1);
+    
+    movswl res1, %esi 
+    movl $fmt1, %edi 
+    movl $0, %eax 
+    call printf 
+    //printf("res2 = %d\n", res2);
+    
+    movswl res2, %esi 
+    movl $fmt2, %edi 
+    movl $0, %eax 
+    call printf 
+    //printf("res2 = %d\n", res2);
+	
+	
+	popq %rbp 
+	addq $56, %rsp
+	xor	%eax, %eax
+	ret
   

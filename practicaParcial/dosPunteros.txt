@@ -28,12 +28,11 @@ int main() {
 }
 
 ---------------------------------------- ASM--------------------------------------------------------------------------------
-
 .data
  //int8_t i = 1;            // índice global i
-    i: .byte 1 
+    i: .byte 3 
  //int8_t j = 2;            // índice global j
-    j: .byte 2 
+    j: .byte 3 
  //int16_t res1;            // resultado global 1
     res1: .word 0 
  
@@ -73,7 +72,7 @@ main:
     movw $3, -18(%rbp)
     movw $5, -16(%rbp)
     movw $7, -14(%rbp)
-    movw $7, -12(%rbp)
+    movw $9, -12(%rbp)
 
     //int16_t *p = a;       // puntero local a, ocupa 8 espacios en memoria (8*8 = 64 bits) (-20,-28)
     
@@ -113,7 +112,7 @@ main:
     // p[j] - q[i]
     subl %edx, %eax
     //res2 = p[j] - q[i];
-    movw %dx, res2
+    movw %ax, res2
     
     
     // imprimir res1 y res2 por separado
@@ -136,4 +135,3 @@ main:
 	addq $56, %rsp
 	xor	%eax, %eax
 	ret
-  

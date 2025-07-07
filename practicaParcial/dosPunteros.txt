@@ -1,0 +1,33 @@
+
+--------------------------------------- C -----------------------------------------------------------------
+#include <stdint.h>
+#include <stdio.h>
+
+int8_t i = 1;            // índice global i
+int8_t j = 2;            // índice global j
+int16_t res1;            // resultado global 1
+int16_t res2;            // resultado global 2
+
+int main() {
+    int16_t a[5] = {2, 4, 6, 8, 10};
+    int16_t b[5] = {1, 3, 5, 7, 9};
+    int16_t *p = a;       // puntero local a
+    int16_t *q = b;       // puntero local b
+
+    // operación 1: suma de p[i] + q[j]
+    res1 = p[i] + q[j];
+
+    // operación 2: resta de p[j] - q[i]
+    res2 = p[j] - q[i];
+
+    // imprimir res1 y res2 por separado
+    printf("res1 = %d\n", res1);
+    printf("res2 = %d\n", res2);
+    return 0;
+    
+}
+
+---------------------------------------- ASM--------------------------------------------------------------------------------
+
+
+  

@@ -131,7 +131,7 @@ main:
     //printf("res2 = %d\n", res2);
 	
 	
-	popq %rbp 
-	addq $56, %rsp
+	addq $56, %rsp // siempre el add primero 
+	popq %rbp
 	xor	%eax, %eax
 	ret

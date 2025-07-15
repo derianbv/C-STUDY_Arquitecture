@@ -13,5 +13,75 @@ Los primeros 6 argumentos de una función se pasan en estos registros:
 Los argumentos adicionales van en la pila.
 El valor de retorno va en %rax.
 
+----------------------------------------------------------------------------------------
 
+.data
+    //int8_t i=1;          //prueba 1
+    i: .byte 2 
+    //int8_t i=2;         //prueba 2
+    //"a[0] = %d",a[0]
+    fmt: .string "a[0] = %d"
 
+.text
+.global main
+main:
+	
+	//prologo main 
+	pushq %rbp //stack en -16 
+	movq %rsp, %rbp 
+	
+	
+//int main()
+//{
+// int16_t a[3]={20000,24500,5000}; 6 bytes de memoria (-6, -1)
+    
+    movw $5000, -6(%rbp)
+    movw $24500, -4(%rbp)    
+    movw $20000, -2(%rbp)    
+    
+//    a[0]=foo(a[i]);
+    
+    movsbq i, %rax 
+    movswq -6(%rbp, %rax, 2), %rdi
+    call foo 
+    movw %ax, -6(%rbp) // en ax esta el argumento de retorno de foo 
+    
+//    printf("a[0] = %d",a[0]);
+    
+    movl $fmt, %edi 
+    movswl -6(%rbp), %esi
+    movl $0, %eax 
+    call printf 
+    
+//    return 0;
+//}
+
+//epilogo main 
+	xor	%eax, %eax
+	popq %rbp
+	ret
+
+//----------------------------------------------------------------------------
+//int16_t foo(int16_t x)
+//{
+//    int16_t m=6500; // 2 bytes en memoria 
+//    return m+x;
+//}
+
+foo:
+
+    //prologo foo
+    pushq %rbp 
+    movq %rsp, %rbp 
+    subq $16, %rsp //para guardar m 
+    
+    movw $6500, -2(%rbp)
+    addl -2(%rbp), %edi 
+    movslq %edi, %rax 
+    
+    //epilogo foo 
+    addq $16, %rsp 
+    popq %rbp 
+    ret 
+	
+	

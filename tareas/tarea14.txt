@@ -12,3 +12,6 @@ Los primeros 6 argumentos de una función se pasan en estos registros:
 
 Los argumentos adicionales van en la pila.
 El valor de retorno va en %rax.
+
+
+

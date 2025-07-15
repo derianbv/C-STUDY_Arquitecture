@@ -1,0 +1,57 @@
+.data 
+//"a[1] = %d",a[1]
+    fmt: .string "a[1] = %d" 
+
+.text
+.global main
+main:
+	//prologo main: 
+	pushq %rbp
+	movq %rsp, %rbp 
+	subq $16, %rsp 
+	
+	//int16_t a[3]={20000,24500,5000}; -6 bytes para variables (-6, -1)
+	movw $20000, -6(%rbp)
+	movw $24500, -4(%rbp)
+	movw $5000, -2(%rbp)
+	
+	//foo(&a[1]);
+
+	leaq -4(%rbp), %rsi 
+	call foo 
+
+//printf("a[1] = %d",a[1]);
+    movl (%rsi), %esi 
+    movl $fmt, %edi 
+    movl $0, %eax 
+    call printf
+	
+	//epilogo main:
+    xor	%eax, %eax
+	addq $16, %rsp 
+	popq %rbp 
+	ret
+
+//------------------------------------------
+//int16_t foo(int16_t *p)
+//{
+//    int16_t m=6500; //2 bytes para variable local 
+//    *p=*p+m; 
+//}
+
+foo:
+    //prologo foo: 
+    pushq %rbp
+    movq %rsp, %rbp 
+    subq $16, %rsp 
+    
+    movw $6500, -2(%rbp)
+    movswl (%rsi), %r8d 
+    addl -2(%rbp), %r8d 
+    movw %r8w, (%rsi) 
+    movslq %r8d, %rax
+    
+    //epilogo foo: 
+    addq $16, %rsp 
+    popq %rbp 
+    ret 

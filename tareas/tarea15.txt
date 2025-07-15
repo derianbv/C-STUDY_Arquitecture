@@ -1,57 +1,43 @@
-.data 
-//"a[1] = %d",a[1]
-    fmt: .string "a[1] = %d" 
+.data
+    fmt: .string "a[1] = %d" // fmt <-- "a[1] = %d"
 
 .text
 .global main
 main:
-	//prologo main: 
-	pushq %rbp
-	movq %rsp, %rbp 
-	subq $16, %rsp 
-	
-	//int16_t a[3]={20000,24500,5000}; -6 bytes para variables (-6, -1)
-	movw $20000, -6(%rbp)
-	movw $24500, -4(%rbp)
-	movw $5000, -2(%rbp)
-	
-	//foo(&a[1]);
+    pushq %rbp 
+    movq %rsp, %rbp // rbp <-- rsp (64 bits)
+    subq $16, %rsp // rsp <-- rsp-16 (64 bits)
 
-	leaq -4(%rbp), %rsi 
-	call foo 
+    movw $20000, -6(%rbp) // rbp-6 <-- (20000) (16 bits) a[0]
+    movw $24500, -4(%rbp) // rbp-4 <-- (24500) (16 bits) a[1]
+    movw $5000, -2(%rbp) // rbp-2 <-- (5000) (16 bits) a[2]
 
-//printf("a[1] = %d",a[1]);
-    movl (%rsi), %esi 
-    movl $fmt, %edi 
-    movl $0, %eax 
-    call printf
-	
-	//epilogo main:
-    xor	%eax, %eax
-	addq $16, %rsp 
-	popq %rbp 
-	ret
+    leaq -4(%rbp), %rsi // rsi <-- &a[1] (64 bits)
+    call foo 
 
-//------------------------------------------
-//int16_t foo(int16_t *p)
-//{
-//    int16_t m=6500; //2 bytes para variable local 
-//    *p=*p+m; 
-//}
+    movswl -4(%rbp), %esi // esi <-- a[1] (32 bits)
+    movl $fmt, %edi // edi <-- fmt (32 bits)
+    movl $0, %eax // eax <-- 0 (32 bits)
+    call printf // call printf
+
+    xor %eax, %eax // eax <-- 0 (32 bits)
+    addq $16, %rsp // rsp <-- rsp+16 (64 bits)
+    popq %rbp 
+    ret
+
 
 foo:
-    //prologo foo: 
-    pushq %rbp
-    movq %rsp, %rbp 
-    subq $16, %rsp 
-    
-    movw $6500, -2(%rbp)
-    movswl (%rsi), %r8d 
-    addl -2(%rbp), %r8d 
-    movw %r8w, (%rsi) 
-    movslq %r8d, %rax
-    
-    //epilogo foo: 
-    addq $16, %rsp 
+    pushq %rbp 
+    movq %rsp, %rbp // rbp <-- rsp (64 bits)
+    subq $16, %rsp // rsp <-- rsp-16 (64 bits)
+
+    movw $6500, -2(%rbp) // rbp-2 <-- (6500) (16 bits) 
+    movswl (%rsi), %r8d // r8d <-- *p (32 bits)
+    addl -2(%rbp), %r8d // r8d <-- r8d + m (32 bits)
+    movw %r8w, (%rsi) // *p <-- r8w (16 bits)
+    movslq %r8d, %rax // rax <-- r8d (64 bits)
+
+    addq $16, %rsp // rsp <-- rsp+16 (64 bits)
     popq %rbp 
     ret 
+

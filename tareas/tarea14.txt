@@ -1,0 +1,14 @@
+📦2. Convención de llamadas (System V AMD64 ABI en Linux):
+Los primeros 6 argumentos de una función se pasan en estos registros:
+
+| Argumento | Registro |
+| --------- | -------- |
+| 1º        | `%rdi`   | edi para fmt
+| 2º        | `%rsi`   | esi para el num 
+| 3º        | `%rdx`   |
+| 4º        | `%rcx`   |
+| 5º        | `%r8`    |
+| 6º        | `%r9`    |
+
+Los argumentos adicionales van en la pila.
+El valor de retorno va en %rax.

@@ -28,40 +28,40 @@ main:
 	
 	//prologo main 
 	pushq %rbp //stack en -16 
-	movq %rsp, %rbp 
+	movq %rsp, %rbp //rbp <- rsp (64 bits)
 	
 	
 //int main()
 //{
 // int16_t a[3]={20000,24500,5000}; 6 bytes de memoria (-6, -1)
     
-    movw $5000, -6(%rbp)
-    movw $24500, -4(%rbp)    
-    movw $20000, -2(%rbp)    
-    
+    movw $5000, -6(%rbp) //rbp - 6  <- (5000) (16 bits) a[0]
+    movw $24500, -4(%rbp) //rbp - 4  <- (24500) (16 bits) a[1] 
+    movw $20000, -2(%rbp)  //rbp - 2  <- (20000) (16 bits) a[2] 
+     
 //    a[0]=foo(a[i]);
     
-    movsbq i, %rax 
-    movswq -6(%rbp, %rax, 2), %rdi
-    call foo 
-    movw %ax, -6(%rbp) // en ax esta el argumento de retorno de foo 
+    movsbq i, %rax //rax  <- (i) (64 bits) 
+    movswq -6(%rbp, %rax, 2), %rdi //rdi  <- (a[i]) (64 bits) 
+    call foo //pusq address, jmp foo 
+    movw %ax, -6(%rbp)  //a[0] <- foo(a[i]) (16 bits bits)    en ax esta el argumento de retorno de foo 
     
 //    printf("a[0] = %d",a[0]);
     
-    movl $fmt, %edi 
-    movswl -6(%rbp), %esi
-    movl $0, %eax 
+    movl $fmt, %edi  //edi  <- fmt (32 bits) 
+    movswl -6(%rbp), %esi //esi  <-  (a[0]) (32 bits) 
+    movl $0, %eax //eax  <-  (0) (32 bits) 
     call printf 
     
 //    return 0;
 //}
 
 //epilogo main 
-	xor	%eax, %eax
+	xor	%eax, %eax //eax <-- (0) (32 bits)
 	popq %rbp
 	ret
 
-//----------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //int16_t foo(int16_t x)
 //{
 //    int16_t m=6500; // 2 bytes en memoria 
@@ -72,16 +72,18 @@ foo:
 
     //prologo foo
     pushq %rbp 
-    movq %rsp, %rbp 
-    subq $16, %rsp //para guardar m 
+    movq %rsp, %rbp  //rbp <- rsp (64 bits)
+    subq $16, %rsp //para guardar m  
     
-    movw $6500, -2(%rbp)
-    addl -2(%rbp), %edi 
-    movslq %edi, %rax 
+    movw $6500, -2(%rbp) //rbp-2 <- (6500) (16 bits)
+    addl -2(%rbp), %edi // edi <- ((rbp-2) + (edi)) (32 bits)
+    movslq %edi, %rax //rax <- (edi) (64 bits) // resultado de foo pasado en rax 
     
     //epilogo foo 
     addq $16, %rsp 
     popq %rbp 
     ret 
 	
+	
+
 	

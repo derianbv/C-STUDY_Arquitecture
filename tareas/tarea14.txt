@@ -29,7 +29,7 @@ main:
 	//prologo main 
 	pushq %rbp //stack en -16 
 	movq %rsp, %rbp //rbp <- rsp (64 bits)
-	subbq $16, %rsp
+	subq $16, %rsp
 	
 	
 //int main()

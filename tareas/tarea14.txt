@@ -29,6 +29,7 @@ main:
 	//prologo main 
 	pushq %rbp //stack en -16 
 	movq %rsp, %rbp //rbp <- rsp (64 bits)
+	subbq $16, %rsp
 	
 	
 //int main()
@@ -58,6 +59,7 @@ main:
 
 //epilogo main 
 	xor	%eax, %eax //eax <-- (0) (32 bits)
+	addq $16, %rsp
 	popq %rbp
 	ret
 

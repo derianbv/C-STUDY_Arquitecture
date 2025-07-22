@@ -1,0 +1,9 @@
+
+| Registro | Significado          |
+| -------- | -------------------- |
+| `%rbx`   | callee-saved         |
+| `%rbp`   | base del stack frame |
+| `%r12`   | callee-saved         |
+| `%r13`   | callee-saved         |
+| `%r14`   | callee-saved         |
+| `%r15`   | callee-saved         |

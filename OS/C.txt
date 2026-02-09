@@ -1,0 +1,5 @@
+-------------------------------------------- MALLOC() -----------------------------------------------------------------------------------------------
+malloc(numero de bytes para alocar), lo aloca en el heap -> saca un tipo de dato *void (un puntero q no sabe a q apunta, hay que castearlo a (int*)) 
+
+**** Errors ****: 
+  

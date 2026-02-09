@@ -1,4 +1,5 @@
 ---------------------------------------- PUNTERO -----------------------------
+!!!!LAS VARIABLES (int a) SON SOLO ETIQUTAS DE DIRECCIONES EN MEMORIA, ES DECIR: a == hx03123, es solo un alias para que sepamos donde está la variable con un nombre humano. 
 Es una variable que almacena una direccion en memoria. 
 
 Si "a" es la ruta, ponerle el * es seguir la ruta hasta llegar al destino.

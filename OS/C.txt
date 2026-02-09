@@ -1,5 +1,43 @@
+----------------------------------------- HEAP Y STACK --------------------------------------------
+**** Stack ****: 
+-El stack es lineal ordenado y crece hacia abajo, lo que significa que es extremadamente rápido ya que se consulta restando, pero es memoria limitada, si me paso con cosas muy grandes o recursion entonces puedo generar un stack over flow. 
+- Su idea es de ir poniendo ladrillos, es medio rigido cuando quiero quitar algo tengo que desmontar todo. Siempre tengo que reescribir las variables
+-El compilador lo usa para varibles declaradas dentro de funciones: int[10] 
+
+
+
+**** heap (monton) ****: 
+- Sirve como un pedazo de memoria mas desordenado (fragmentado) en donde se puede agarrar memoria de cualquier parte, tiene mas espacio que el stack. 
+- Sirve cuando usamos malloc()
+- Su idea es ser un campo comun donde puedo dejar cosas que no se pierden ni reescriben. 
+
+
+
+**** Por que Heap en vez de Stack ****: 
+
+1. Persistencia de los datos (Vida útil)
+En el Stack, la memoria está ligada al flujo de ejecución; cuando una función termina y se ejecuta la instrucción RET en ensamblador, el puntero de pila (SP) se desplaza y el marco de memoria de esa función se considera libre, destruyendo lógicamente todo lo que había dentro. El Heap, en cambio, permite que los datos sobrevivan independientemente de las funciones. Esto es vital cuando necesitas crear un objeto o estructura en una función y seguir utilizándolo en otras partes del programa mucho tiempo después de que la función original haya finalizado. Sin el Heap, los datos morirían antes de poder ser procesados por el resto del código.
+
+2. Flexibilidad de tamaño y redimensión
+El Stack es una estructura rígida y contigua; para que una variable crezca, tendría que desplazar a todas las variables que se apilaron después de ella, lo cual es ineficiente y costoso para la CPU. En el Heap, al ser un espacio de memoria "desordenado" o fragmentado, no existe esa presión de vecindad. Si un bloque de memoria necesita hacerse más grande (usando realloc), el sistema simplemente busca un nuevo hueco con el tamaño suficiente en cualquier otra parte del "montón" y actualiza el puntero. Esto permite manejar estructuras de datos dinámicas, como listas o arreglos que crecen según la necesidad del usuario en tiempo de ejecución.
+
+3. Compartición en sistemas multi-hilo
+En la arquitectura moderna, cada hilo (thread) de un programa tiene su propio Stack privado para gestionar sus llamadas a funciones y variables locales de forma segura y rápida. Si toda la RAM fuera un solo Stack, sería imposible que dos hilos compartieran información de manera eficiente sin corromper el orden de las llamadas del otro. El Heap actúa como una zona de memoria compartida o "terreno neutral": un hilo puede reservar memoria, escribir datos en ella y simplemente pasarle el puntero a otro hilo para que lo lea. Esto facilita la comunicación y el trabajo en paralelo sin interferir con el flujo de ejecución individual de cada hilo.
+
+
 -------------------------------------------- MALLOC() -----------------------------------------------------------------------------------------------
 malloc(numero de bytes para alocar), lo aloca en el heap -> saca un tipo de dato *void (un puntero q no sabe a q apunta, hay que castearlo a (int*)) 
 
-**** Errors ****: 
+
+
+
+
+------------------- **** Errors ****: 
+
+si la ram está llena o hubo un error malloc devuelve NULL: 
+
+if (a == NULL) {
+    perror("Error: No hay memoria suficiente.\n");
+    return -1; // Terminar el programa o manejar el error
+}
   

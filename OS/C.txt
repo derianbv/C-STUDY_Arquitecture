@@ -1,3 +1,53 @@
+---------------------------------------- PUNTERO -----------------------------
+Es una variable que almacena una direccion en memoria. 
+
+Si "a" es la ruta, ponerle el * es seguir la ruta hasta llegar al destino.
+
+El nivel de exploración
+1. Sin el asterisco (a)
+Te quedas parado en la puerta. Solo miras el número de la casa.
+
+En C: a
+
+En ASM: MOV EAX, EBX (suponiendo que EBX tiene la dirección).
+
+Resultado: Tienes la dirección.
+
+2. Con un asterisco (*a)
+Dás ese "paso más" que mencionas. Entras a la casa y ves qué hay en los cajones.
+
+En C: *a
+
+En ASM: MOV EAX, [EBX] (los corchetes son ese "paso más").
+
+Resultado: Tienes el dato.
+
+¿Y si hubiera dos asteriscos? (**a)
+Solo por curiosidad, para que veas que tu lógica de "explorar un paso más" es infalible: Si tienes un puntero a otro puntero (un int **a), entonces:
+
+a: El mapa para encontrar el segundo mapa.
+
+*a: Sigues el primer mapa y encuentras el segundo mapa (otra dirección).
+
+**a: Sigues el segundo mapa y finalmente encuentras el tesoro (el número).
+
+En resumen: Cada * que agregas es un "salto" adicional que le pides a la CPU que haga en la memoria RAM.
+
+
+
+
+
+
+
+**** Addres of & ****: 
+1. numero: Es el valor (el 25).
+2. &numero: Es la ubicación en la RAM donde el compilador guardó ese 25 (ejemplo: 0x100).
+
+
+
+
+
+
 ----------------------------------------- HEAP Y STACK --------------------------------------------
 **** Stack ****: 
 -El stack es lineal ordenado y crece hacia abajo, lo que significa que es extremadamente rápido ya que se consulta restando, pero es memoria limitada, si me paso con cosas muy grandes o recursion entonces puedo generar un stack over flow. 
@@ -26,7 +76,7 @@ En la arquitectura moderna, cada hilo (thread) de un programa tiene su propio St
 
 
 -------------------------------------------- MALLOC() -----------------------------------------------------------------------------------------------
-malloc(numero de bytes para alocar), lo aloca en el heap -> saca un tipo de dato *void (un puntero q no sabe a q apunta, hay que castearlo a (int*)) 
+malloc(numero de bytes para alocar), lo aloca en el heap -> devuelve una direccion en memoria 
 
 
 

@@ -13,8 +13,8 @@ se acaba la funcion y se borran dichas variables, para malloc se asigna en heap 
 (sumando o restando al stack pointer O(1), en cambio el heap se demora más ya que el sistema debe encontrar
 un espacio lo suficientemente grande para guardar el dato.
 
-STACK: Automatico del compilador
-HEAP: Manual por el programador
+STACK: Automatico del compilador, alcance LOCAL en funciones, cosas estáticas o arreglos pequeños, o parametros de funciones y direccion de retorno. 
+HEAP: Manual por el programador, alcance GLOBAL por cualquier puntero, cada vez que creo algo dinámico o un objeto con new. 
 
 */
 printf("%p\n",ptrAptr);

@@ -1,3 +1,12 @@
+------------------------------- LIBRERIAS ------------------------
+Cuando hago algo como #include <stdio.h> lo unico que hace el compilador es copiar todo el codigo del archivo header (.h) lo copie al comienzo de mi archivo,
+por esto puedo usar variables o funciones sin usar namespacing como: archivo.run(), sino solo run() porque es como si estuviera escrita en la parte de arriba 
+
+
+
+
+
+
 ---------------------------------------- PUNTERO -----------------------------
 !!!!LAS VARIABLES (int a) SON SOLO ETIQUTAS DE DIRECCIONES EN MEMORIA, ES DECIR: a == hx03123, es solo un alias para que sepamos donde está la variable con un nombre humano. 
 Es una variable que almacena una direccion en memoria. 

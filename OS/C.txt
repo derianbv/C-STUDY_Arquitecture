@@ -132,6 +132,25 @@ Los archivos son una fila india de 1s y 0s, por ejemplo en un archivo de  1 KB, 
 Si lo abres como Texto (fprintf, fscanf): C interpreta cada grupo de 8 bits según una tabla (como ASCII o UTF-8), El byte 01000001 se traduce al número 65, que en pantalla se ve como una 'A'.
 Si lo abres como Binario (fwrite, fread): C no intenta interpretar nada. Simplemente copia los bits tal cual de la memoria RAM al disco. Esto se usa para imágenes, ejecutables o bases de datos.
 
+
+size_t fwrite(const void *ptr, size_t tamano, size_t cantidad, FILE *flujo);
+Los 4 elementos que debes entregarle:
+
+    const void *ptr (¿QUÉ envío?):
+    Es la dirección de memoria de los datos que quieres escribir. Puede ser un array, una estructura o una variable simple. Se usa void * porque a fwrite no le importa si estás enviando fotos, números o texto; solo ve bytes.
+
+    size_t tamano (¿Cuánto mide cada pieza?):
+    El tamaño en bytes de un solo elemento de los que vas a enviar. Normalmente usamos sizeof() para no equivocarnos.
+
+        Ejemplo: sizeof(int) o sizeof(char).
+
+    size_t cantidad (¿Cuántas piezas envío?):
+    El número de elementos. Si es un array de 10 enteros, aquí pones 10. Si es una sola variable, pones 1.
+
+    FILE *flujo (¿A dónde lo envío?):
+    El puntero que obtuviste con fopen. Es el "marcador" que sabe en qué parte de la fila india de bits debe escribir.
+
+
 !!!!!!!!!!!!!!!!!!!!!
 La data (stream) empieza lit desde la posicion 0 de la fila ya que cuando hago fopen el sistema operativo hace el trabajo sucio de separar los datos con la metadata, en Linux el sistema de archivos guarda en Inodos la metadata de eso. 
 

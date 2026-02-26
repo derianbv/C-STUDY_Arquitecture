@@ -151,6 +151,33 @@ Los 4 elementos que debes entregarle:
     El puntero que obtuviste con fopen. Es el "marcador" que sabe en qué parte de la fila india de bits debe escribir.
 
 WRITE RETORNA UN DATO SIZE_T 
+
+
+
+size_t fread(void *ptr, size_t tamano, size_t cantidad, FILE *flujo);
+
+Los 4 argumentos de fread()
+
+    void *ptr (¿DÓNDE lo guardo?):
+    Es la dirección de memoria de la variable o array donde quieres que caigan los datos que vas a leer del archivo.
+
+        Nota: Aquí no usas const porque esta vez la función sí va a modificar esa memoria (va a escribir en ella).
+
+    size_t tamano (¿Cuánto mide cada pieza?):
+    El tamaño en bytes de un solo elemento (usa sizeof).
+
+    size_t cantidad (¿Cuántas piezas quiero traer?):
+    El número de elementos que quieres leer.
+
+    FILE *flujo (¿DE DÓNDE lo saco?):
+    El puntero al archivo que abriste con fopen (usando "r", "rb", "r+", etc.).
+
+
+
+
+
+
+
 !!!!!!!!!!!!!!!!!!!!!
 La data (stream) empieza lit desde la posicion 0 de la fila ya que cuando hago fopen el sistema operativo hace el trabajo sucio de separar los datos con la metadata, en Linux el sistema de archivos guarda en Inodos la metadata de eso. 
 

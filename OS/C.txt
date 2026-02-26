@@ -150,7 +150,7 @@ Los 4 elementos que debes entregarle:
     FILE *flujo (¿A dónde lo envío?):
     El puntero que obtuviste con fopen. Es el "marcador" que sabe en qué parte de la fila india de bits debe escribir.
 
-
+WRITE RETORNA UN DATO SIZE_T 
 !!!!!!!!!!!!!!!!!!!!!
 La data (stream) empieza lit desde la posicion 0 de la fila ya que cuando hago fopen el sistema operativo hace el trabajo sucio de separar los datos con la metadata, en Linux el sistema de archivos guarda en Inodos la metadata de eso. 
 

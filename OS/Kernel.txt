@@ -1,0 +1,5 @@
+
+
+---------------------------------------- PASOS A SEGUIR ---------------------------------------
+0:
+<stdio.h> es la libreria que guarda la Estructura de File 

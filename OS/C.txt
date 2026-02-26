@@ -105,9 +105,10 @@ if (a == NULL) {
 
 
 -------------------------------------------- LEER DE ARCHIVOS --------------------------------------------------------------------------------------
+EPP:
+<stdio.h> tiene la struct de FILE, a la que para usar archivos vamos a estar apuntando con un puntero: 
 
-
-
+File* ptrArchivo; 
 
 
 ---------------------------------------------------------- ESTRUCTURAS --------------------------------------------------------------------

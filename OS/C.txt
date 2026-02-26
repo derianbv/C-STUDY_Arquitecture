@@ -132,6 +132,20 @@ Los archivos son una fila india de 1s y 0s, por ejemplo en un archivo de  1 KB, 
 Si lo abres como Texto (fprintf, fscanf): C interpreta cada grupo de 8 bits según una tabla (como ASCII o UTF-8), El byte 01000001 se traduce al número 65, que en pantalla se ve como una 'A'.
 Si lo abres como Binario (fwrite, fread): C no intenta interpretar nada. Simplemente copia los bits tal cual de la memoria RAM al disco. Esto se usa para imágenes, ejecutables o bases de datos.
 
+!!!!!!!!!!!!!!!!!!!!!
+La data (stream) empieza lit desde la posicion 0 de la fila ya que cuando hago fopen el sistema operativo hace el trabajo sucio de separar los datos con la metadata, en Linux el sistema de archivos guarda en Inodos la metadata de eso. 
+
+Ahora, hay una excepción importante. Muchos formatos de archivo (como .JPG, .MP3 o .EXE) guardan su propia metadata dentro de la fila india de bytes, al principio. A esto se le llama Header (Cabecera).
+
+Si abres un archivo .bmp (una imagen simple) en C:
+
+    Los primeros 54 bytes son la "metadata interna" (ancho, alto, colores).
+
+    A partir del byte 55, empiezan los colores de los píxeles (tus datos).
+
+Para C, el byte 0 sigue siendo el inicio del Header. Si tú quieres leer solo los colores, tendrías que hacer:
+Cuando tu cursor llega al byte número tamaño_del_archivo, la función feof(f) devuelve verdadero.
+
 ---------------------------------------------------------- ESTRUCTURAS --------------------------------------------------------------------
 EPP: 
 Las estructuras de C son como las listas de python, es la manera de agrupar datos de diferentes tipos. 

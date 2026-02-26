@@ -110,13 +110,106 @@ if (a == NULL) {
 
 
 
+---------------------------------------------------------- ESTRUCTURAS --------------------------------------------------------------------
+EPP: 
+Las estructuras de C son como las listas de python, es la manera de agrupar datos de diferentes tipos. 
+
+"""
+
+struct Estudiante{
+    char[50] nombre; //50 bytes  
+    int edad; //4 bytes
+    float nota; //4 bytes 
+} 
+
+Acá no se hace nada en memoria, solo se le avisa a la cpu que tiene que entender estos simbolos cuando aparezcan. 
+"""
+
+
+DECLARACION: 
+Aca ya se le asignan espacios en memoria casi continuos, si no fuera por el Padding que guarda el tamaño de las variables en espacioes de memoria multiples a ellos: 
+
+"""
+struc Estudiante Santi;
+
+Acá teoricamente devería guardar 58 bytes la estructura, pero como el procesador agarra de a 4 u 8 bytes a la vez (depende de la arquitectura del procesador) entonces siempre los deja en multiplos de cuatro a los datos, para 
+solo tener que consultarlos una vez, (Va más rápido), por ejemplo, en la estructura de arriba se hace el sig padding (es como si fueran paginas de un libro, si una variable esta en la parte final de una pagina y el comienzo
+de otra, entonces tendras que enviar esas dos paginas usando el bus da datos, cada pagina equivale a 4 bytes, empezando por el 0-3,4-7,8-11: 
+
+
+struct Estudiante{
+    char[50] nombre; //50 bytes  
+    int edad; //4 bytes
+    float nota; //4 bytes 
+} 
+
+Los datos se ponen en memoria en orden como yo los pongo, por eso dependiendo de como los ponga puedo ahorra ram. 
+
+posiciones (1byte) | dato 
+0: char 
+(...)
+49: char  (aca como agarra en un bus de  envio de datos de 4 en 4 bytes, el hardware tiene que hacer 50/4 consultas, es decir: 12.5 consultas (EL HARDWARE DESTESTA ESTOS DECIMALES PORQUE LOS TIENE QUE APROXIMAR AL TECHO (13), o leer 13 paginas.
+50: padding (pag 13) 
+51: padding (pag 13, 0-51 hay 52 paginas o 52 4 bytes (4*13). 
+52: int (52 multiplo de 4)  
+53: int
+54: int
+55: int
+(56 - 59): 56 multiplo de 4 entonces inicia el float. 
+60: libre para el sig numero porque 60 es multiplo de 4.
+
+Peso total de bytes: 0-59: 60 bytes. 
+
+
+EJEMPLO:
 
 
 
 
+#include <stdio.h>
+
+int main()
+{
+    
+
+struct Estudiante{
+    char nombre[50]; //50 bytes  
+    int edad; //4 bytes
+    float nota; //4 bytes 
+};
 
 
+struct Estudiante santi; 
 
+printf("tamaño en bytes de la estructura: %zu bytes", sizeof(santi)); 
+
+    
+    
+    return 0;
+}
+
+
+OUT: 
+tamaño en bytes de la estructura: 60 bytes
+
+
+EN GENERAL ESTA OPTIMIZADO SI LOS DATOS GRANDES ESTAN PRIMERO 
+
+"""
+
+
+INCIALIZACION: 
+-RAPIDA: struct Estudiante a2 = {"Ana", 20, 9.8};
+
+-LENTA (Usando punto). 
+
+strcpy(alumno1.nombre, "Carlos");
+    alumno1.edad = 21;
+    alumno1.promedio = 9.5;
+
+
+-SI ES UN PUNTERO A UNA STRUCT (-> es atajo para desferenciar):
+(*puntero).miembro == puntero->miembro
 
 
 

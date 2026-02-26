@@ -102,4 +102,33 @@ if (a == NULL) {
     perror("Error: No hay memoria suficiente.\n");
     return -1; // Terminar el programa o manejar el error
 }
+
+
+-------------------------------------------- LEER DE ARCHIVOS --------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   

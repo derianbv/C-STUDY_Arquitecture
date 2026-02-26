@@ -108,8 +108,29 @@ if (a == NULL) {
 EPP:
 <stdio.h> tiene la struct de FILE, a la que para usar archivos vamos a estar apuntando con un puntero: 
 
-File* ptrArchivo; 
+File* ptrArchivo; // se guardan 64 bits en stack para guardar la direccion de un dato tipo FILE, la etiqueta de esos 64 bites es ptrArchivo. 
 
+Luego se guarda en la cajita de ptrArchivo la direccion en memoria del File que retorna fopen (Null si hubo error); 
+
+ptrArchivo = fopen("archivo.txt","w");   (archivoname, tipo de lectura). 
+
+Confirmar error: 
+
+
+if (f == NULL) {
+        printf("Error: fopen retornó NULL (0x0)\n");
+    } else {
+        // Imprimimos la dirección de memoria en hexadecimal
+        printf("fopen tuvo éxito y retornó la dirección: %p\n", (void*)f);
+
+
+MODIFICARLOS: 
+
+Los archivos son una fila india de 1s y 0s, por ejemplo en un archivo de  1 KB, tienes exactamente 8,192 bits (0 y 1) pegados uno tras otro. La codificacion de estos 0 y 1 cambian dependiendo de como abra el archivo y su extensión: 
+
+
+Si lo abres como Texto (fprintf, fscanf): C interpreta cada grupo de 8 bits según una tabla (como ASCII o UTF-8), El byte 01000001 se traduce al número 65, que en pantalla se ve como una 'A'.
+Si lo abres como Binario (fwrite, fread): C no intenta interpretar nada. Simplemente copia los bits tal cual de la memoria RAM al disco. Esto se usa para imágenes, ejecutables o bases de datos.
 
 ---------------------------------------------------------- ESTRUCTURAS --------------------------------------------------------------------
 EPP: 

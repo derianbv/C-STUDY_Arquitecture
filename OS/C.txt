@@ -14,6 +14,8 @@ por esto puedo usar variables o funciones sin usar namespacing como: archivo.run
 #define (Macros del Preprocesador), NO OCUPAN ESPACIO EN MEMORIA, son variables constantes que el procesador busca en el codigo y remplaza por su valor asignado, es decir, si tengo:
 #define LIST_QUEUE 400, no puedo en el codigo hacer LIST_QUEUE = 4444. 
 
+Diferente a las variables fuera de main que tambien son globales pero pueden cambiar durante el código. 
+
 ---------------------------------------- PUNTERO -----------------------------
 !!!!LAS VARIABLES (int a) SON SOLO ETIQUTAS DE DIRECCIONES EN MEMORIA, ES DECIR: a == hx03123, es solo un alias para que sepamos donde está la variable con un nombre humano. 
 Es una variable que almacena una direccion en memoria. 

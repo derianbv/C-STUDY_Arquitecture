@@ -18,4 +18,35 @@ IPC_CREAT | 0666
 Significa, si no existe crealo y si ya existe pasame el id, ponle los permisos de pasar 6 a bits. por cada grupo. (0666 empieza en 0 para que el compilador sepa que esta en octal
 
 
+
+------- Usar shared memory: 
  #include <sys/shm.h> // libreria de shared memory
+
+ int shmget(key_t key, size_t size, int shmflg); // SOLO CREAR EL ESPACIO 
+
+key = es asignarle un valor al espacio, para llegar ahí 
+size = cuanta memoriq quiero guardar 
+int shmflag (flag): IPC_CREAT | 0666
+
+
+shmat(shm_id, 0, 0) // ENTRAR AL ESPACIO, devuelve un puntero o adress void que es desde donde empieza la memoria. 
+
+Si shmget era obtener la "llave de la habitación", shmat es el momento en el que abres la puerta y entras.
+
+    shmat significa Shared Memory Attach (Acoplar memoria compartida). Su trabajo es mapear ese bloque de memoria que vive en el sistema operativo directamente al espacio de direcciones de tu       programa, para que puedas usarlo como si fuera una variable normal (un array o un struct).
+    
+    Desglose de los argumentos: shmat(shm_id, 0, 0)
+    1. shm_id
+    Es el número entero que te devolvió shmget. Es la referencia para saber qué habitación quieres abrir.
+    
+    2. El primer 0 (shmaddr)
+    Este argumento sirve para decirle al sistema en qué dirección de memoria exacta quieres que se "pegue" el bloque.
+    
+    ¿Por qué ponemos 0?: Porque le estamos diciendo al Sistema Operativo: "Tú eres el experto, busca cualquier espacio vacío en mi memoria y pégalo ahí". Casi siempre se usa 0 (o NULL) para evitar conflictos de direcciones.
+    
+    3. El segundo 0 (shmflg)
+    Son las banderas de acceso.
+    
+    Si pones 0: La memoria se acopla en modo Lectura y Escritura (por defecto).
+    
+    Si pusieras SHM_RDONLY: Solo podrías leer lo que hay ahí, pero no modificarlo.

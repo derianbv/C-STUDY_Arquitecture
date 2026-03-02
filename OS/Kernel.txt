@@ -16,3 +16,6 @@ En el lenguaje C, la forma en la que escribes el número le dice al compilador q
 Basicamente eso es pasarle un número en binario, lo que hahce  "|" es que sobrepone los bits activos entre  IPC_CREAT y 0666 (si 1 y 1 entonces 1, si 1 y 0 entonces 1. es un or de bits).
 IPC_CREAT | 0666
 Significa, si no existe crealo y si ya existe pasame el id, ponle los permisos de pasar 6 a bits. por cada grupo. (0666 empieza en 0 para que el compilador sepa que esta en octal
+
+
+ #include <sys/shm.h> // libreria de shared memory

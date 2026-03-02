@@ -50,3 +50,6 @@ Si shmget era obtener la "llave de la habitación", shmat es el momento en el qu
     Si pones 0: La memoria se acopla en modo Lectura y Escritura (por defecto).
     
     Si pusieras SHM_RDONLY: Solo podrías leer lo que hay ahí, pero no modificarlo.
+
+--- DETATCH 
+  r = shmdt(ap);

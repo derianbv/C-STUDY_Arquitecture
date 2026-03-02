@@ -6,6 +6,7 @@ por esto puedo usar variables o funciones sin usar namespacing como: archivo.run
 
 <stdio.h>: printf, scanf
 <stdlib.h>: malloc, exit
+<sys/shm.h>: shared memory
 
 
 

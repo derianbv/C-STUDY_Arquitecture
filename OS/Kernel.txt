@@ -53,3 +53,23 @@ Si shmget era obtener la "llave de la habitación", shmat es el momento en el qu
 
 --- DETATCH 
   r = shmdt(ap);
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PROCESOS ---------------------------------------------------------------------------------------------
+
+**** en memoria ****: 
+
+A cada proceso se le da memoria virtual que le hace creer al proceso que maneja memoria fisica, pero luego al final el MMU es el que mapea esto con memoria física real. 
+
+PROCESO A (PID: 101)          MMU (El Traductor)          RAM FÍSICA
+   [ Dir Virtual 0x40 ]  ------> [  TABLA DE  ]  ------>  [ Celda Real #99 ]
+                                 [  PÁGINAS   ]
+   PROCESO B (PID: 102)          [            ]
+   [ Dir Virtual 0x40 ]  ------> [  TRADUCCIÓN]  ------>  [ Celda Real #21 ]
+
+
+
+
+

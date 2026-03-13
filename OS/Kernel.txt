@@ -72,4 +72,24 @@ PROCESO A (PID: 101)          MMU (El Traductor)          RAM FÍSICA
 
 
 
+Cómo ocurre: Escribes ./mi_programa en la terminal o haces doble clic en un icono.
+
+Qué hace el SO: El Sistema Operativo busca el archivo en el disco, crea un nuevo PID, le asigna su propio Data Segment, Stack y Heap desde cero, y empieza a ejecutar el main.
+Como es virtual, el proceso cree que tiene toda la ram para él.
+
+
+--------------------- Partes ----------------
+1. Process Control Block: 
+PID, estado, prioridad, credenciales.
+
+struct task_struct { // Así se llama el PCB en Linux
+    volatile long state;    // READY, RUNNING, etc.
+    int pid;                // El ID del proceso
+    struct thread_struct thread; // AQUÍ se guardan el PC y los Registros
+    // ... muchos más campos ...
+};
+
+
+
+
 

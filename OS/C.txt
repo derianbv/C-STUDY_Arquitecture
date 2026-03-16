@@ -1,3 +1,24 @@
+------------- CRUCIAL -----------------------------------
+Para C los arreglos son solo punteros a un primer elemento, es decir que si tengo algo así 
+
+
+Arr[i] == A + i, A es un puntero y si le sumo 3 y lo que guarda es un int, aumenta de 4 bytes en 4 bytes (es inteligente). 
+ptr[4] = $$Dirección\_Final = Dirección\_Base + (4 \times sizeof(tipo))$$
+
+Por eso si tengo un puntero, el que sea, puedo ir N posiciones adelante con puntero[N], no importa si lo que viene es algo que yo puse ahí u otra basura de la RAM 
+
+
+
+
+
+
+
+
+
+
+
+
+
 ------------------------------- LIBRERIAS ------------------------
 Cuando hago algo como #include <stdio.h> lo unico que hace el compilador es copiar todo el codigo del archivo header (.h) lo copie al comienzo de mi archivo,
 por esto puedo usar variables o funciones sin usar namespacing como: archivo.run(), sino solo run() porque es como si estuviera escrita en la parte de arriba 

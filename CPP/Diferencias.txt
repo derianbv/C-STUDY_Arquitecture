@@ -1,0 +1,178 @@
+
+
+
+************************* Diferencias entre Cpp y C ***********************************
+1. Cpp tiene for each********************: 
+
+int arr[] = {10, 20, 30};
+for (int i = 0; i < 3; i++) {
+    printf("%d ", arr[i]);
+}
+
+
+int arr[] = {10, 20, 30};
+for (int n : arr) { // "Para cada 'n' en 'arr'"
+    std::cout << n << " ";
+}
+-----------------------------------------------------------------------
+
+2. Cpp tiene Strings ***********:
+char nombre[50];
+printf("Dime tu nombre: ");
+fgets(nombre, 50, stdin); // Tienes que manejar el tamaño y el \n
+
+
+#include <string>
+std::string nombreCompleto;
+std::cout << "Dime tu nombre: ";
+std::getline(std::cin, nombreCompleto); // Lee toda la línea y ajusta el tamaño solo
+
+------------------------------------------------------------------------------
+3. la forma de scanear y hacer printf. 
+--------------------------------------------------------
+ 4. En cpp se pueden sobrecargar funciones (que tengan el mismo nombre) si reciben parametros diferentes: 
+
+int sumar(int a, int b) { return a + b; }
+double sumar(double a, double b) { return a + b; }
+
+// El compilador sabe a cuál llamar según los argumentos
+sumar(5, 10);      // Llama a la versión de enteros
+sumar(5.5, 1.2);   // Llama a la versión de dobles
+
+
+-----------------------------------------------------------
+5. En Cpp se puede tener parametros por defecto en una funcion (como python): 
+
+void saludar(std::string mensaje = "Hola", int veces = 1) {
+    for(int i = 0; i < veces; i++) {
+        std::cout << mensaje << std::endl;
+    }
+}
+
+int main() {
+    saludar();                // Imprime "Hola" una vez
+    saludar("Qué tal", 3);    // Imprime "Qué tal" tres veces
+}
+
+------------------------------------------------------------
+6. se castea diferente: 
+
+En C usas el cast estilo (int)variable. C++ tiene sus propios operadores de casting que son más fáciles de buscar en el código y más seguros (aunque el estilo C sigue funcionando, se desaconseja).
+
+C: int x = (int)3.14;
+
+C++: int x = static_cast<int>(3.14);
+
+--------------------------------------------------------------
+7. Errores: En C se devuelve -1, en cpp existe el try catch (como python): 
+
+try {
+    if (divisor == 0) throw std::runtime_error("¡División por cero!");
+    int resultado = 10 / divisor;
+} catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+}
+
+-----------------------------------------------------------------------------------
+8.  CLASES ******************************:
+
+A. Encapsulamiento (public vs private)
+En C, cualquier parte del programa puede modificar un struct. En C++, puedes proteger los datos.
+
+private: Solo las funciones dentro de la clase pueden ver esto. Evita que alguien haga miAuto.velocidad = -500; por error.
+
+public: Es la interfaz que expones al usuario.
+
+B. El Constructor y Destructor
+Olvídate de funciones como crear_usuario() y destruir_usuario().
+
+Constructor (NombreClase()): Se ejecuta automáticamente cuando creas el objeto. Sirve para inicializar memoria o variables.
+
+Destructor (~NombreClase()): Se ejecuta automáticamente cuando el objeto sale de memoria (cuando termina el main o un if). Es ideal para hacer free() o cerrar archivos sin que se te olvide.
+
+C. Herencia
+Puedes crear una clase base y que otras "hereden" sus poderes. Por ejemplo, una clase Vehiculo y que Coche y Moto hereden de ella para no repetir código.
+
+----------------------------------MEMORIAAAAAAAAAAAAAAAAAAA ---------------------------------------
+
+Aquí está la regla de oro:
+
+Sin new: Vive en el Stack (Memoria automática). VARIABLE COMO TAL
+Con new: Vive en el Heap (Memoria dinámica). PUNTERO AL HEAP. 
+
+
+En c: 
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definimos la "clase" como un struct
+struct Archivo {
+    FILE* fp;
+};
+
+// El "Constructor" manual
+struct Archivo abrir_archivo(const char* nombre) {
+    struct Archivo a;
+    a.fp = fopen(nombre, "w");
+    if (a.fp == NULL) {
+        perror("Error al abrir");
+    }
+    printf("Archivo abierto manualmente.\n");
+    return a;
+}
+
+// El "Destructor" manual
+void cerrar_archivo(struct Archivo* a) {
+    if (a->fp != NULL) {
+        fclose(a->fp);
+        printf("Archivo cerrado manualmente.\n");
+    }
+}
+
+void funcion() {
+    struct Archivo miArchivo = abrir_archivo("datos.txt");
+    
+    // ... usamos el archivo ...
+    fprintf(miArchivo.fp, "Hola desde C");
+
+    // ¡OJO! En C, si te olvidas de esta línea, el archivo se queda abierto
+    // hasta que el sistema operativo mate el proceso.
+    cerrar_archivo(&miArchivo); 
+}
+
+
+en cpp: 
+class Archivo {
+private:
+    FILE* fp;
+public:
+    // Constructor
+    Archivo(const char* nombre) {
+        fp = fopen(nombre, "w");
+    }
+
+    // Destructor
+    ~Archivo() {
+        if (fp) fclose(fp);
+    }
+};
+
+void funcion() {
+    Archivo miArchivo("datos.txt"); // Vive en el STACK
+    // ... usas el archivo ...
+} // <-- AQUÍ miArchivo muere y se ejecuta ~Archivo() automáticamente. SOLO SI ESTA EN STACK (no uso new).
+
+Si fuera con new (o heap): 
+
+void funcion() {
+    Archivo* miArchivo = new Archivo("datos.txt"); // Puntero en stack, objeto en HEAP //CON NEW SE USA UN PUNTERO, crea el malloc y tambien llama al constructor En C: struct Archivo* a = malloc(sizeof(struct Archivo));.
+    
+    // ... usas el archivo ...
+    
+    delete miArchivo; // <-- AQUÍ se ejecuta ~Archivo() y se libera la memoria.
+}
+
+
+
+
+

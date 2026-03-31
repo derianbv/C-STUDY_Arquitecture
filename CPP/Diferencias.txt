@@ -189,6 +189,8 @@ Se libera la Memoria en el heap (lo que en C haría free).
 
 Si en C++ usaras free(ptr) con un objeto, la memoria se liberaría, pero el destructor nunca se ejecutaría, y si ese objeto tenía archivos abiertos o más memoria interna, habrías creado un desastre (un "leak" de recursos).
 
+IMPORTANTE: Si usas new, usas delete. Si usas new[] (para arrays), usas delete[].
+
 ------------------------------------------------------------------------------------------------
 10. SCOPES:
 
@@ -238,6 +240,91 @@ En C: int *p = NULL; (Es un entero 0 convertido a puntero).
 En C++: int *p = nullptr; (nullptr tiene su propio tipo de dato: nullptr_t). Nunca se confunde con un entero.
 
 
+
+
+**** Smart Pointer *******
+4. Punteros Inteligentes (Smart Pointers)
+Esta es la diferencia más grande. En C++ moderno (C++11 en adelante), casi nunca deberías usar new o delete manualmente. Usamos objetos que manejan el puntero por nosotros.
+
+A. std::unique_ptr (El dueño único)
+Se asegura de que solo exista UN puntero a esa memoria. Cuando el puntero sale del stack (llave de cierre }), hace el delete automáticamente.
+
+C++
+#include <memory>
+
+void funcion() {
+    std::unique_ptr<int> p = std::make_unique<int>(100);
+    // No hace falta 'delete', se limpia solo al terminar la función.
+}
+
+
+**** shared pointer *****
+
+B. std::shared_ptr (Dueños compartidos)
+Varios punteros apuntan al mismo objeto. El objeto solo se borra cuando el último de los punteros muere (lleva un contador interno).
+
+
+**** this **** 
+El Puntero this
+En C++, todas las funciones dentro de una clase tienen un puntero oculto llamado this. Es la dirección del objeto actual.
+
+C++
+class Persona {
+    int edad;
+public:
+    void setEdad(int edad) {
+        this->edad = edad; // 'this->edad' es la variable de la clase, 'edad' es el parámetro.
+    }
+};
+
+
+**** Aritmética de Punteros vs. Iteradores ****
+En C hacías p++ para recorrer un array. En C++ usamos Iteradores. Son como punteros con esteroides que funcionan igual para arrays, listas enlazadas o mapas.
+
+C++
+std::vector<int> v = {1, 2, 3};
+for (auto it = v.begin(); it != v.end(); ++it) {
+    std::cout << *it; // Se usa igual que un puntero
+}
+
+
+****** Referencias ******
+        1. En C (Usando Punteros)
+        Tienes que pasar la dirección y usar asteriscos dentro de la función. Es propenso a errores (¿qué pasa si el puntero es NULL?).
+        
+        C
+        void incrementar(int *n) {
+            if (n != NULL) { // Validación manual obligatoria
+                (*n)++;      // Sintaxis ruidosa
+            }
+        }
+        
+        int main() {
+            int x = 5;
+            incrementar(&x); // Tienes que acordarte del '&'
+            return 0;
+        }
+        2. En C++ (Usando Referencias)
+        La función recibe la variable directamente, pero el símbolo & en el parámetro le dice al compilador: "No hagas una copia, usa la variable original".
+        
+        C++
+        void incrementar(int &n) { // El '&' aquí indica referencia
+            n++;                   // ¡Se usa como una variable normal!
+        }
+        
+        int main() {
+            int x = 5;
+            incrementar(x);        // ¡No necesitas el '&' aquí! Es transparente.
+            return 0;
+        }
+
+
+
+
+
+
+
+
 13. Operadores :: y  . -----------------------------------------------
 
 Operador,Nombre,Se aplica a...,Analogía
@@ -247,7 +334,42 @@ Operador,Nombre,Se aplica a...,Analogía
 es decir, cuando entro al template uso ::, cuando entro a una instancia uso . 
 
 
-
-
-
-
+14. Estructuras de datos y Templates: 
+            
+            1. std::vector (El Array Dinámico Inteligente)
+            Es la estructura más usada en C++. Es un array que crece solo. Olvídate de realloc.
+            
+            En C: Tienes que llevar la cuenta del size, la capacity y hacer realloc manualmente.
+            
+            En C++: v.push_back(valor); y el vector se encarga de todo.
+            
+            2. std::string (Cadenas de texto de verdad)
+            En C, un string es un char* amargado. En C++, std::string es una estructura de datos completa.
+            
+            Puedes sumarlos: str1 + str2.
+            
+            Puedes compararlos: if (str1 == str2).
+            
+            Se encargan de su propia memoria.
+            
+            3. std::map y std::unordered_map (Diccionarios / Hash Tables)
+            Esto no existe en C estándar. Te permite guardar pares de Clave-Valor.
+            
+            C++
+            #include <unordered_map>
+            std::unordered_map<string, int> edades;
+            edades["Leo"] = 35; // Inserta o busca en tiempo récord (O(1))
+            4. std::list (Lista Doblemente Enlazada)
+            Ya no tienes que crear el struct Nodo { struct Nodo* next; ... }. C++ te da la lista lista para usar con métodos como .sort(), .reverse() y .merge().
+            
+            5. std::stack, std::queue y std::priority_queue
+            Estructuras de tipo LIFO (Pilas), FIFO (Colas) y Colas de prioridad (donde el elemento más grande siempre sale primero).
+            
+            
+            La gran ventaja: Los "Templates" (Plantillas)
+            En C, si hacias una lista de int, no servía para float. Tenías que usar void* y perder la seguridad de tipos.
+            En C++, las estructuras usan Templates, lo que permite que funcionen con cualquier tipo de dato manteniendo la velocidad del código nativo.
+            
+            C++
+            std::vector<int> miListaDeEnteros;
+            std::vector<Persona> miListaDeObjetos; // ¡Cualquier cosa entra aquí!

@@ -63,6 +63,13 @@ C: int x = (int)3.14;
 
 C++: int x = static_cast<int>(3.14);
 
+
+Tipo de Cast,Qué hace,Nivel de Riesgo
+static_cast,"Conversiones normales (int a float, puntero a clase base). Verifica en compilación que tenga sentido.",Bajo (Seguro)
+const_cast,Únicamente para quitar o poner el atributo const.,Medio
+reinterpret_cast,Trata los bits de un tipo como si fueran otro (como castear un long a un puntero). Es el más parecido al estilo C.,Alto (Peligroso)
+dynamic_cast,La joya de la corona. Verifica en tiempo de ejecución si un puntero a una clase padre realmente apunta a una clase hija específica.,Muy Seguro
+
 --------------------------------------------------------------
 7. Errores: En C se devuelve -1, en cpp existe el try catch (como python): 
 
@@ -93,7 +100,7 @@ Destructor (~NombreClase()): Se ejecuta automáticamente cuando el objeto sale d
 C. Herencia
 Puedes crear una clase base y que otras "hereden" sus poderes. Por ejemplo, una clase Vehiculo y que Coche y Moto hereden de ella para no repetir código.
 
-----------------------------------MEMORIAAAAAAAAAAAAAAAAAAA ---------------------------------------
+9. ----------------------------------MEMORIAAAAAAAAAAAAAAAAAAA ---------------------------------------
 
 Aquí está la regla de oro:
 
@@ -171,6 +178,74 @@ void funcion() {
     
     delete miArchivo; // <-- AQUÍ se ejecuta ~Archivo() y se libera la memoria.
 }
+
+----------delete ptr: 
+Una precisión técnica sobre el delete
+Cuando haces delete ptr;, ocurren dos cosas en orden:
+
+Se ejecuta el Destructor del objeto al que apunta ptr (para que el objeto limpie sus asuntos internos).
+
+Se libera la Memoria en el heap (lo que en C haría free).
+
+Si en C++ usaras free(ptr) con un objeto, la memoria se liberaría, pero el destructor nunca se ejecutaría, y si ese objeto tenía archivos abiertos o más memoria interna, habrías creado un desastre (un "leak" de recursos).
+
+------------------------------------------------------------------------------------------------
+10. SCOPES:
+
+2. Los Scopes Internos (Loops, Ifs, Bloques sueltos)
+Aquí es donde C++ brilla frente a C. Los loops o bloques { } no crean un "Stack Frame" nuevo (siguen en el mismo bloque de la función), pero sí definen un Scope.
+
+Cualquier objeto creado dentro de un { } tiene "vida" solo dentro de esas llaves.
+
+void miFuncion() {
+    for (int i = 0; i < 3; i++) {
+        Archivo temp("log.txt"); // Nace al inicio de la iteración
+        // ... usar temp ...
+    } // <-- AQUÍ MUERE el objeto 'temp' en CADA iteración.
+      // El destructor ~Archivo() se llama 3 veces en total.
+}
+
+11. Estructuras -------------------------------------------------------------------------------
+C++ no decide "esto es muy grande, lo mando al heap". Lo que pasa es que std::vector (y otras estructuras como std::string) están programadas internamente para pedir memoria al heap en su Constructor.
+
+El "Esqueleto" vs. El "Contenido"
+Cuando haces std::vector<int> v(1000000);, el objeto v se divide en dos partes:
+
+En el Stack (El control): El objeto v en sí es muy pequeño (usualmente 24 o 32 bytes). Solo guarda tres cosas: un puntero al inicio de los datos, el tamaño actual y la capacidad.
+
+En el Heap (La carga): El constructor del vector ve que le pediste un millón de enteros, así que internamente hace un new int[1000000]. Ese millón de enteros vive en el Heap.
+
+
+void funcion() {
+    int arr[1000000]; // ¡ESTO ESTÁ EN EL STACK!
+    // Si el stack de tu sistema es de 1MB o 2MB, 
+    // lo más probable es que sufras un "Stack Overflow" y el programa explote.
+}
+
+void funcion() {
+    std::vector<int> v(1000000); // El "control" está en el stack, los datos en el heap.
+    // El heap tiene mucha más memoria disponible (toda tu RAM),
+    // así que esto es seguro.
+}
+
+
+12. Punteros ------------------------------------------------------------------------------
+El valor de "Nada": NULL vs nullptr
+En C, NULL es simplemente un #define de 0. Esto causa problemas porque el compilador no sabe si te refieres al número cero o a una dirección de memoria.
+
+En C: int *p = NULL; (Es un entero 0 convertido a puntero).
+
+En C++: int *p = nullptr; (nullptr tiene su propio tipo de dato: nullptr_t). Nunca se confunde con un entero.
+
+
+13. Operadores :: y  . -----------------------------------------------
+
+Operador,Nombre,Se aplica a...,Analogía
+::,Resolución de Ámbito,"Clases, Namespaces, Enums","""En la carpeta X, busca el archivo Y"""
+.,Acceso a Miembros,Objetos (Instancias),"""De este objeto real, dame su atributo"""
+
+es decir, cuando entro al template uso ::, cuando entro a una instancia uso . 
+
 
 
 

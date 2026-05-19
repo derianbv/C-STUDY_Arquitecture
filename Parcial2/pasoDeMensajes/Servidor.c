@@ -26,3 +26,5 @@ struct sockaddr_in cliente;
 socklen_t addresLenServidor;
 socklen addressLenCliente; 
 double pi; 
+
+//4. Función socket() - le dice al kernel que reserve espacio para una conexión por red. 

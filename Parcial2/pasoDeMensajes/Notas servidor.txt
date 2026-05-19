@@ -1,0 +1,15 @@
+************ Descripcion sockaddr_in y htons(8080);**********************************************************
+
+#include <stdio.h>
+#include <netinet/in.h> // <- Aquí la incluimos
+
+int main() {
+    struct sockaddr_in direccion_servidor;
+
+    direccion_servidor.sin_family = AF_INET;       // Indica que usamos IPv4
+    direccion_servidor.sin_port = htons(8080);     // Asigna el puerto 8080 (convertido para la red)
+    direccion_servidor.sin_addr.s_addr = INADDR_ANY; // Escucha en cualquier IP disponible
+
+    printf("Configuración de red lista.\n");
+    return 0;
+}

@@ -18,14 +18,11 @@ int main() {
 
 ********************  socket() ***********************************
 
-int mi_socket = socket(dominio, tipo, protocolo);
+int mi_socket = socket(dominio, tipo, protocolo); devuelve un file descriptoe 
 Dominio (domain): Especifica la familia de protocolos. Lo más común es usar AF_INET (para IPv4) o AF_INET6 (para IPv6).
 
 Tipo (type): Especifica cómo se enviarán los datos. Usas SOCK_STREAM si quieres una conexión segura y ordenada (TCP) o SOCK_DGRAM para envíos rápidos sin confirmación (UDP).
 
 Protocolo (protocol): Generalmente se pone en 0 para que el sistema operativo elija automáticamente el protocolo correcto según el tipo (por ejemplo, TCP para SOCK_STREAM).
-
-
-
 
 
